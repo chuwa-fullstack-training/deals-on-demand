@@ -1,0 +1,95 @@
+<div class="lg:max-w-screen-2xl lg:mx-auto lg:my-3">
+    <div class="flex justify-evenly">
+        <!-- large screen -->
+        <div class="hidden lg:inline-block">
+            <div class="m-10 max-w-6xl my-5 border-1 rounded-md border-gray-300 bg-gray-100 shadow-sm p-5">
+                <div class="flex justify-evenly">
+                  <div class="min-w-fit mt-2">
+                    <div class="flex space-x-5 items-center">
+                        <div class="min-w-fit space-y-8">
+                            <div *ngIf="bestProducts?.image1!=''" (mouseenter)="showImage(bestProducts?.image1)"><img src="{{bestProducts?.image1}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                            <div *ngIf="bestProducts?.image2!=''" (mouseenter)="showImage(bestProducts?.image2)"><img src="{{bestProducts?.image2}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                            <div *ngIf="bestProducts?.image3!=''" (mouseenter)="showImage(bestProducts?.image3)"><img src="{{bestProducts?.image3}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                            <div *ngIf="bestProducts?.image4!=''" (mouseenter)="showImage(bestProducts?.image4)"><img src="{{bestProducts?.image4}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                            <div *ngIf="bestProducts?.image5!=''" (mouseenter)="showImage(bestProducts?.image5)"><img src="{{bestProducts?.image5}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                            <div *ngIf="bestProducts?.image6!=''" (mouseenter)="showImage(bestProducts?.image6)"><img src="{{bestProducts?.image6}}" alt="" class="w-20 h-14 cursor-pointer"></div>
+                        </div>
+                        <div class="min-w-[24rem]" *ngIf="imageUrl!==''"><img src="{{imageUrl}}" alt="" class="w-96 h-64 rounded-md"></div>
+                        <div class="min-w-[24rem]" *ngIf="imageUrl===''"><img src="{{bestProducts?.image1}}" alt="" class="w-96 h-64 rounded-md"></div>
+
+                    </div>
+                </div>
+                    <div class="mt-2 p-2 pl-5">
+                        <p class="font-bold text-sm md:text-xl">
+                            {{ bestProducts?.title }}
+                        </p>
+                        <p class="text-xs md:text-base">Amazon </p>
+                        <hr class="border-1 border-gray-500" />
+                        <div class="flex space-x-2">
+            <p class="font-bold text-xs md:text-base">
+              {{ bestProducts?.currentPrice }} USD
+            </p>
+          </div>
+          <div *ngIf="bestProducts?.originalPrice!=''" class="flex space-x-1 text-gray-400 text-xs md:text-sm">
+            <p>
+              MRP : <span class="line-through">{{ bestProducts?.originalPrice }} </span
+              >USD
+            </p>
+          </div>
+          <hr class="border-1 border-gray-500" />
+          <p class="font-semibold text-xs md:text-base">About this item</p>
+          <p class="max-w-xs md:max-w-3xl text-xs md:text-base">
+            {{ bestProducts?.desc }}
+          </p>
+          <a href="{{ bestProducts?.clickURL }}"
+            ><button
+              class="text-white text-xs md:text-base bg-green-500 font-semibold px-3 py-1 mx-auto hover:bg-green-800"
+            >
+              Buy Now
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- small screen and md screen -->
+  <div class="mx-auto lg:hidden">
+    <div
+      class="flex-col max-w-2xl mx-auto my-2 border-1 border-gray-300 shadow-md p-2 rounded-sm">
+    <div class="flex-col justify-center"> <div class=>{{ bestProducts?.title }}</div>
+    <div class="text-xs md:text-base">Amazon</div>
+    <div class="flex justify-center">
+      <img src="{{ bestProducts?.image1 }}" alt="" class="w-32 h-32 md:w-60 md:h-60" />
+    </div>
+    <div class="flex space-x-2">
+                            <p class="font-bold text-xs md:text-base">
+                                {{ bestProducts?.currentPrice }} USD
+                            </p>
+                        </div>
+                        <div *ngIf="bestProducts?.originalPrice!=''" class="flex space-x-1 text-gray-400 text-xs md:text-sm">
+                            <p>
+                                MRP : <span class="line-through">{{ bestProducts?.originalPrice }} </span
+                        >USD
+                      </p>
+                    </div>  
+                </div>
+                <hr class="border-2 border-gray-500" />
+                <p class="font-semibold text-xs md:text-base">About this item</p>
+                <p class="max-w-xs md:max-w-3xl text-xs md:text-base">
+                    {{ bestProducts?.desc }}
+                </p>
+                <a href="{{ bestProducts?.clickURL }}">
+                <div class="flex justify-center">
+                  <button
+                  class="text-white text-xs md:text-base bg-green-500 font-semibold px-3 py-1 mx-auto hover:bg-green-800">
+                  Buy Now
+                </button>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="lg:my-6">
+          <img src="../../../assets/image15-2.png" class="lg:w-full" alt="" />
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,22 @@
+.navbar {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.navbar_search {
+  width: 39vw;
+}
+
+.navbar_search_input {
+  width: 33vw;
+}
+
+.navbar_search_dropdown {
+  width: 38vw;
+}
+
+.bg_color {
+  background-color: #2d2d86;
+}

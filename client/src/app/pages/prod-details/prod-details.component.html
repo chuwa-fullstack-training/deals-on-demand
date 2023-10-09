@@ -1,0 +1,86 @@
+<div class="lg:max-w-screen-2xl lg:mx-auto lg:my-3">
+    <div class="flex justify-evenly">
+        <!-- large screen -->
+        <div class="hidden lg:inline-block">
+            <div class="m-10 max-w-6xl my-5 border-1 rounded-md border-gray-300 bg-gray-100 shadow-lg p-5">
+                <div class="flex justify-evenly">
+                    <div class="p-5">
+                        <img src="{{ prod.ImageUrl }}" alt="" class="w-fit h-fit rounded-md" />
+                    </div>
+                    <div class="mt-2 p-2 pl-5">
+                        <p class="font-bold text-sm md:text-xl">
+                            {{ prod.Name }}
+                        </p>
+                        <p class="text-xs md:text-base">{{ prod.Manufacturer }}</p>
+                        <hr class="border-1 border-gray-500" />
+                        <div class="flex space-x-2">
+                            <span *ngIf="prod.DiscountPercentage!=''" class="text-red-500 text-xs md:text-base">-{{ prod.DiscountPercentage }} %</span
+            >
+            <p class="font-bold text-xs md:text-base">
+              {{ prod.CurrentPrice }} {{ prod.Currency }}
+            </p>
+          </div>
+          <div *ngIf="prod.OriginalPrice!=''" class="flex space-x-1 text-gray-400 text-xs md:text-sm">
+            <p>
+              MRP : <span class="line-through">{{ prod.OriginalPrice }} </span
+              >{{ prod.Currency }}
+            </p>
+          </div>
+          <hr class="border-1 border-gray-500" />
+          <p class="font-semibold text-xs md:text-base">About this item</p>
+          <p class="max-w-xs md:max-w-3xl text-xs md:text-base">
+            {{ prod.Description }}
+          </p>
+          <a href="{{ prod.Url }}"
+            ><button
+              class="text-white text-xs md:text-base bg-green-500 font-semibold px-3 py-1 mx-auto hover:bg-green-800"
+            >
+              Buy Now
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- small screen and md screen -->
+  <div class="mx-auto lg:hidden">
+    <div
+      class="flex-col max-w-2xl mx-auto my-2 border-1 border-gray-300 shadow-md p-2 rounded-sm">
+    <div class="flex-col justify-center"> <div class=>{{ prod.Name }}</div>
+    <div class="text-xs md:text-base">{{ prod.Manufacturer }}</div>
+    <div class="flex justify-center">
+      <img src="{{ prod.ImageUrl }}" alt="" class="w-32 h-32 md:w-60 md:h-60" />
+    </div>
+    <div class="flex space-x-2">
+      <span *ngIf="prod.DiscountPercentage!=''"  class="text-red-500 text-xs md:text-base">-{{ prod.DiscountPercentage }} %</span>
+                            <p class="font-bold text-xs md:text-base">
+                                {{ prod.CurrentPrice }} {{ prod.Currency }}
+                            </p>
+                        </div>
+                        <div *ngIf="prod.OriginalPrice!=''" class="flex space-x-1 text-gray-400 text-xs md:text-sm">
+                            <p>
+                                MRP : <span class="line-through">{{ prod.OriginalPrice }} </span
+                        >{{ prod.Currency }}
+                      </p>
+                    </div>  
+                </div>
+                <hr class="border-2 border-gray-500" />
+                <p class="font-semibold text-xs md:text-base">About this item</p>
+                <p class="max-w-xs md:max-w-3xl text-xs md:text-base">
+                    {{ prod.Description }}
+                </p>
+                <a href="{{ prod.Url }}">
+                <div class="flex justify-center">
+                  <button
+                  class="text-white text-xs md:text-base bg-green-500 font-semibold px-3 py-1 mx-auto hover:bg-green-800">
+                  Buy Now
+                </button>
+                </div>
+                </a>
+            </div>
+        </div>
+        <div class="lg:my-6">
+          <img src="../../../assets/image15-2.png" class="lg:w-full" alt="" />
+        </div>
+      </div>
+    </div>

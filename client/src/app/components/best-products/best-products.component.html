@@ -1,0 +1,390 @@
+<p class="text-xs md:text-lg lg:text-xl m-[1.25vw] font-semibold">
+  Best Deals on Electronics
+</p>
+
+<!--list 1 Scroll Small and Mediium Screen -->
+<div class="lg:hidden">
+  <div class="flex overflow-auto">
+    <div *ngFor="let item of list1" class="">
+      <!-- small screen -->
+      <div class="md:hidden">
+        <div
+          class="border border-gray mobileCardScroll m-2 shadow-md rounded-md"
+          *ngIf="item.title != ''"
+        >
+          <div class="m-3 space-y-2">
+            <div class="flex items-center justify-center">
+              <img
+                src="{{ item.image1 }}"
+                alt=""
+                class="rounded-lg w-14 h-14"
+              />
+            </div>
+            <div class="mobileCard_text text-gray-500 mt-0">amazon</div>
+            <div class="line-clamp-2 mobileCard_text font-semibold">
+              {{ item.title }}
+            </div>
+            <div class="flex flex-wrap justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="text-green-500 mobileCard_text font-semibold">
+                  ${{ item.currentPrice }}
+                </div>
+
+                <div
+                  *ngIf="item.originalPrice != ''"
+                  class="mobileCard_text line-through text-gray-600"
+                >
+                  ${{ item.originalPrice }}
+                </div>
+              </div>
+            </div>
+            <div
+              (click)="addcId(item.id)"
+              class="text-white mobileCard_button bg-blue-900 w-fit rounded-sm px-1 py-0.5 hover:bg-blue-950 cursor-pointer"
+            >
+              View
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--medium screen-->
+      <div class="hidden md:inline-block large:hidden">
+        <div
+          class="border border-gray md:mx-3 md:my-1 lg:mx-5 lg:my-2 mediumCard shadow-md rounded-md"
+          *ngIf="item.title != ''"
+        >
+          <div class="m-3 space-y-2">
+            <div class="flex items-center justify-center">
+              <img
+                src="{{ item.image1 }}"
+                alt=""
+                class="rounded-lg w-20 h-20"
+              />
+            </div>
+            <div class="text-xs text-gray-500 mt-0">amazon</div>
+            <div class="line-clamp-2 text-sm font-semibold">
+              {{ item.title }}
+            </div>
+            <div class="flex flex-wrap justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="text-green-500 text-xs lg:text-sm font-semibold">
+                  ${{ item.currentPrice }}
+                </div>
+
+                <div
+                  *ngIf="item.originalPrice != ''"
+                  class="text-xs lg:text-sm line-through text-gray-600"
+                >
+                  ${{ item.originalPrice }}
+                </div>
+              </div>
+            </div>
+
+            <div
+              (click)="addcId(item.id)"
+              class="text-white text-xs bg-blue-900 px-2 py-1 w-fit rounded-sm hover:bg-blue-950 cursor-pointer"
+            >
+              View deals
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- List 2 scroll small and medium screen -->
+<div class="lg:hidden">
+  <div class="flex overflow-auto">
+    <div *ngFor="let item of list2" class="">
+      <!-- List 2 small screen -->
+      <div class="md:hidden">
+        <div
+          class="border border-gray mobileCardScroll m-2 shadow-md rounded-md"
+          *ngIf="item.title != ''"
+        >
+          <div class="m-3 space-y-2">
+            <div class="flex items-center justify-center">
+              <img
+                src="{{ item.image1 }}"
+                alt=""
+                class="rounded-lg w-14 h-14"
+              />
+            </div>
+            <div class="mobileCard_text text-gray-500 mt-0">amazon</div>
+            <div class="line-clamp-2 mobileCard_text font-semibold">
+              {{ item.title }}
+            </div>
+            <div class="flex flex-wrap justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="text-green-500 mobileCard_text font-semibold">
+                  ${{ item.currentPrice }}
+                </div>
+
+                <div
+                  *ngIf="item.originalPrice != ''"
+                  class="mobileCard_text line-through text-gray-600"
+                >
+                  ${{ item.originalPrice }}
+                </div>
+              </div>
+            </div>
+            <div
+              (click)="addcId(item.id)"
+              class="text-white mobileCard_button bg-blue-900 w-fit rounded-sm px-1 py-0.5 hover:bg-blue-950 cursor-pointer"
+            >
+              View
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--list2 medium screen-->
+      <div class="hidden md:inline-block large:hidden">
+        <div
+          class="border border-gray md:mx-3 md:my-1 lg:mx-5 lg:my-2 mediumCard shadow-md rounded-md"
+          *ngIf="item.title != ''"
+        >
+          <div class="m-3 space-y-2">
+            <div class="flex items-center justify-center">
+              <img
+                src="{{ item.image1 }}"
+                alt=""
+                class="rounded-lg w-20 h-20"
+              />
+            </div>
+            <div class="text-xs text-gray-500 mt-0">amazon</div>
+            <div class="line-clamp-2 text-sm font-semibold">
+              {{ item.title }}
+            </div>
+            <div class="flex flex-wrap justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="text-green-500 text-xs lg:text-sm font-semibold">
+                  ${{ item.currentPrice }}
+                </div>
+
+                <div
+                  *ngIf="item.originalPrice != ''"
+                  class="text-xs lg:text-sm line-through text-gray-600"
+                >
+                  ${{ item.originalPrice }}
+                </div>
+              </div>
+            </div>
+
+            <div
+              (click)="addcId(item.id)"
+              class="text-white text-xs bg-blue-900 px-2 py-1 w-fit rounded-sm hover:bg-blue-950 cursor-pointer"
+            >
+              View deals
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- List 1 Carousel Large Screen -->
+<div class="flex items-center">
+  <div class="hidden lg:inline-block z-50">
+    <button
+      *ngIf="currentIndex != 0"
+      (click)="slideCarousel(-1)"
+      class="border-1 border-gray-400 bg-white p-2 rounded-full absolute z-1"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="md:flex overflow-hidden">
+    <div class="transition delay-150 duration-300 ease-in-out flex">
+      <!-- give multiple of 18 (18x) as index multiple according to card size and padding -->
+      <div
+        class="carousel-card"
+        *ngFor="let item of list1"
+        [style.transform]="'translateX(' + -currentIndex * 36 + 'vw)'"
+      >
+        <!--large screen carousel-->
+        <div class="hidden lg:inline-block">
+          <div
+            class="border border-gray md:mx-3 md:my-1 lg:mx-5 lg:my-2 largeCard shadow-md rounded-md"
+            *ngIf="item.title != ''"
+          >
+            <div class="m-3 space-y-2">
+              <div class="flex items-center justify-center">
+                <img
+                  src="{{ item.image1 }}"
+                  alt=""
+                  class="rounded-lg w-35 h-40"
+                />
+              </div>
+              <div class="text-xs text-gray-500 mt-0">amazon</div>
+              <div class="line-clamp-2 text-sm font-semibold">
+                {{ item.title }}
+              </div>
+              <div class="flex flex-wrap justify-between items-center">
+                <div class="flex items-center space-x-2">
+                  <div class="text-green-500 text-xs lg:text-sm font-semibold">
+                    ${{ item.currentPrice }}
+                  </div>
+
+                  <div
+                    *ngIf="item.originalPrice != ''"
+                    class="text-xs lg:text-sm line-through text-gray-600"
+                  >
+                    ${{ item.originalPrice }}
+                  </div>
+                </div>
+                <div
+                  (click)="addcId(item.id)"
+                  class="text-white text-xs bg-blue-900 px-2 py-1 rounded-sm hover:bg-blue-950 cursor-pointer"
+                >
+                  View deals
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden lg:inline-block z-50" *ngIf="currentIndex !== list1.length / 3">
+    <button
+      (click)="slideCarousel(1)"
+      class="border-1 border-gray-400 bg-white p-2 rounded-full absolute z-1"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!--list2 large screen slide carousel-->
+<div class="flex items-center">
+  <div class="hidden lg:inline-block z-50">
+    <button
+      *ngIf="currentIndex2 != 0"
+      (click)="slideCarousel2(-1)"
+      class="border-1 border-gray-400 bg-white p-2 rounded-full absolute z-1"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="md:flex overflow-hidden">
+    <div class="transition delay-150 duration-300 ease-in-out flex">
+      <!-- give multiple of 18 (18x) as index multiple according to card size and padding -->
+      <div
+        class="carousel-card"
+        *ngFor="let item of list2"
+        [style.transform]="'translateX(' + -currentIndex2 * 36 + 'vw)'"
+      >
+        <!--large screen carousel-->
+        <div class="hidden lg:inline-block">
+          <div
+            class="border border-gray md:mx-3 md:my-1 lg:mx-5 lg:my-2 largeCard shadow-md rounded-md"
+            *ngIf="item.title != ''"
+          >
+            <div class="m-3 space-y-2">
+              <div class="flex items-center justify-center">
+                <img
+                  src="{{ item.image1 }}"
+                  alt=""
+                  class="rounded-lg w-35 h-40"
+                />
+              </div>
+              <div class="text-xs text-gray-500 mt-0">amazon</div>
+              <div class="line-clamp-2 text-sm font-semibold">
+                {{ item.title }}
+              </div>
+              <div class="flex flex-wrap justify-between items-center">
+                <div class="flex items-center space-x-2">
+                  <div class="text-green-500 text-xs lg:text-sm font-semibold">
+                    ${{ item.currentPrice }}
+                  </div>
+
+                  <div
+                    *ngIf="item.originalPrice != ''"
+                    class="text-xs lg:text-sm line-through text-gray-600"
+                  >
+                    ${{ item.originalPrice }}
+                  </div>
+                </div>
+                <div
+                  (click)="addcId(item.id)"
+                  class="text-white text-xs bg-blue-900 px-2 py-1 rounded-sm hover:bg-blue-950 cursor-pointer"
+                >
+                  View deals
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden lg:inline-block z-50">
+    <button
+      *ngIf="currentIndex2 !== list2.length / 2"
+      (click)="slideCarousel2(1)"
+      class="border-1 border-gray-400 bg-white p-2 rounded-full absolute z-1"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.25 4.5l7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
