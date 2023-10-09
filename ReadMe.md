@@ -2,21 +2,20 @@
 
 ## Setup locally
 
+clone the code from the [github repo](https://github.com/chuwa-fullstack-training/deals-on-demand)<br />
+`$ git clone https://github.com/chuwa-fullstack-training/deals-on-demand.git`
+
 ### Server side
 
 1. install Java 17
 2. install maven, or if you are using IntelliJ, it has maven built in
-3. clone the code from the [github repo](https://github.com/kalyansai1420/dd_backend)
-   `$ git clone https://github.com/kalyansai1420/dd_backend dod-server`
-4. run `cd dod-server && mvn clean install -u` to install all the dependencies
-5. run `mvn spring-boot:run` to start the server
+3. run `cd server && mvn clean install -u` to install all the dependencies
+4. run `mvn spring-boot:run` to start the server
 
 ### Client side
 
-1. clone the code from the [github repo](https://github.com/kalyansai1420/dd_frontend)
-   `$ git clone https://github.com/kalyansai1420/dd_backend dod-client`
-2. run `cd dod-client && npm install` to install all the dependencies
-3. run `npm start` to start the client
+1. run `cd client && npm install` to install all the dependencies. If you encounter some errors during the installation, you can try to remove `node_modules` and `package-lock.json` and then run `npm install --force`
+2. run `npm start` to start the client
 
 ## Description
 
