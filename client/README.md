@@ -10,10 +10,16 @@
 
 ### Setup
 
-1. Install dependencies
+1. Install dependencies. Two ways to do this:
 
    ```bash
    pnpm install
+   ```
+
+   or if you stay at root directory, you can do
+
+   ```bash
+   pnpm run install:client
    ```
 
 2. Start the development server

@@ -2,8 +2,11 @@
 
 ## Setup locally
 
-clone the code from the [github repo](https://github.com/chuwa-fullstack-training/deals-on-demand)<br />
-`$ git clone https://github.com/chuwa-fullstack-training/deals-on-demand.git`
+1. clone the code from the [github repo](https://github.com/chuwa-fullstack-training/deals-on-demand)<br />
+   `$ git clone https://github.com/chuwa-fullstack-training/deals-on-demand.git`
+2. checkout to the branch `react-refactor`
+3. (optional) make sure you have installed pnpm globally<br />
+   `$ pnpm install`
 
 ### Server side
 
@@ -14,8 +17,7 @@ clone the code from the [github repo](https://github.com/chuwa-fullstack-trainin
 
 ### Client side
 
-1. run `cd client && npm install` to install all the dependencies. If you encounter some errors during the installation, you can try to remove `node_modules` and `package-lock.json` and then run `npm install --force`
-2. run `npm start` to start the client
+checkout [here](./client/README.md)
 
 ## Description
 

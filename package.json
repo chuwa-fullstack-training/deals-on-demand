@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "pre-commit": "pnpm run --filter \"client\" pre-commit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "install:client": "pnpm install --filter \"client\""
   },
   "keywords": [],
   "author": "",
