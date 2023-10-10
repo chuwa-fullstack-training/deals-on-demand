@@ -1,27 +1,59 @@
-# React + TypeScript + Vite
+# Deals on Demand - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started
 
-Currently, two official plugins are available:
+### Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- node version: `v18`
+- npm version: `v9`
+- pnpm version: `v8` (optional, but **recommended**)
 
-## Expanding the ESLint configuration
+### Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Install dependencies
 
-- Configure the top-level `parserOptions` property like this:
+   ```bash
+   pnpm install
+   ```
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+2. Start the development server
+
+   ```bash
+   pnpm dev
+   ```
+
+3. Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Code Formatting
+
+This project uses [Prettier](https://prettier.io/) for code formatting. You can run the formatter with the following command:
+
+```bash
+pnpm format
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The configuration for Prettier is located in the `.prettierrc.json` file.
+
+## Linting
+
+This project uses [ESLint](https://eslint.org/) for linting. You can run the linter with the following command:
+
+```bash
+pnpm lint
+```
+
+The configuration for ESLint is located in the `.eslintrc.cjs` file.
+
+## Testing
+
+This project uses [Jest](https://jestjs.io/) for testing. You can run the tests with the following command:
+
+```bash
+pnpm test
+```
+
+## Pre-commit Hooks
+
+This project uses [Husky](https://typicode.github.io/husky/#/) for pre-commit hooks. The pre-commit hooks are configured in the `.husky` directory of the parent directory. Since this is a monorepo including client and server both, the pre-commit hooks have to be configured in the root directory.
+
+When you commit your changes, the hooks will automatically run the following commands: `eslint --fix` --> `prettier --write` --> `jest`, iff any `{js,jsx,ts,tsx}` files have been staged.

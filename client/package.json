@@ -7,7 +7,8 @@
     "build": "tsc && vite build",
     "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prettier": "prettier src --check",
+    "format": "prettier src --check",
+    "format:write": "prettier src --write",
     "preview": "vite preview",
     "pre-commit": "lint-staged",
     "test": "jest"
@@ -44,7 +45,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
-      "prettier --write",
+      "pnpm format:write",
       "pnpm test -- --findRelatedTests --bail"
     ]
   }
