@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "pnpm run test -- --watchAll=false"
+    "pre-commit": "lint-staged"
   }
 }
