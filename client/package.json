@@ -49,7 +49,7 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "pnpm format:write",
-      "pnpm test -- --findRelatedTests --bail"
+      "pnpm test -- --findRelatedTests --bail --passWithNoTests"
     ]
   }
 }
