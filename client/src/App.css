@@ -4,7 +4,18 @@
   padding: 2rem;
   text-align: center;
 }
+/*-webkit-scrollbar-thumb {*/
+/*  background: #000;*/
+/*}*/
+::-webkit-scrollbar {
+  height: 10px;
+  /* width of the entire scrollbar */
+}
 
+::-webkit-scrollbar-thumb {
+  background-color: #1a1a1a33; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -17,7 +28,6 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
