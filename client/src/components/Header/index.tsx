@@ -5,7 +5,6 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
   InputBase,
   Button,
   Box
@@ -26,7 +25,12 @@ export const Header: React.FC = () => {
         >
           <Toolbar>
             <IconButton edge="start" color="inherit">
-              <img src={logoSrc} alt="logo" height="40px" style={{ borderRadius: '50%' }} />
+              <img
+                src={logoSrc}
+                alt="logo"
+                height="40px"
+                style={{ borderRadius: '50%' }}
+              />
             </IconButton>
             <Box
               sx={{
@@ -86,20 +90,35 @@ export const Header: React.FC = () => {
             </Box>
           </Toolbar>
           <Box sx={{ backgroundColor: 'white', height: '2px' }} />
-          <Toolbar sx={{ width: "60%", justifyContent: 'space-between'}}>
-            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
+          <Toolbar sx={{ width: '60%', justifyContent: 'space-between' }}>
+            <Button
+              color="inherit"
+              sx={{ textTransform: 'none', padding: '0' }}
+            >
               Top Deals
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
+            <Button
+              color="inherit"
+              sx={{ textTransform: 'none', padding: '0' }}
+            >
               Electronics
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
+            <Button
+              color="inherit"
+              sx={{ textTransform: 'none', padding: '0' }}
+            >
               Travel & Vacation
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
+            <Button
+              color="inherit"
+              sx={{ textTransform: 'none', padding: '0' }}
+            >
               Automobile
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
+            <Button
+              color="inherit"
+              sx={{ textTransform: 'none', padding: '0' }}
+            >
               More
             </Button>
           </Toolbar>
