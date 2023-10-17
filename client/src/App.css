@@ -1,8 +1,15 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+} */
+/*-webkit-scrollbar-thumb {*/
+/*  background: #000;*/
+/*}*/
+::-webkit-scrollbar {
+  height: 10px;
+  /* width of the entire scrollbar */
 }
 /*-webkit-scrollbar-thumb {*/
 /*  background: #000;*/
