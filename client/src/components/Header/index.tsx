@@ -14,6 +14,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MenuIcon from '@mui/icons-material/Menu';
+import logoSrc from '../../assets/logo.png';
 
 export const Header: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ export const Header: React.FC = () => {
         >
           <Toolbar>
             <IconButton edge="start" color="inherit">
-              <img src="your-logo-url-here.png" alt="logo" height="40px" />
+              <img src={logoSrc} alt="logo" height="40px" style={{ borderRadius: '50%' }} />
             </IconButton>
             <Box
               sx={{
@@ -84,27 +85,26 @@ export const Header: React.FC = () => {
               </Button>
             </Box>
           </Toolbar>
-          <Box sx={{ backgroundColor: 'white', height: '3px' }} />
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
-            <Button color="inherit" sx={{ textTransform: 'none' }}>
+          <Box sx={{ backgroundColor: 'white', height: '2px' }} />
+          <Toolbar sx={{ width: "60%", justifyContent: 'space-between'}}>
+            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
               Top Deals
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none' }}>
+            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
               Electronics
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none' }}>
+            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
               Travel & Vacation
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none' }}>
+            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
               Automobile
             </Button>
-            <Button color="inherit" sx={{ textTransform: 'none' }}>
+            <Button color="inherit" sx={{ textTransform: 'none', padding: '0' }}>
               More
             </Button>
           </Toolbar>
         </AppBar>
       </div>
-      <div></div>
     </>
   );
 };
