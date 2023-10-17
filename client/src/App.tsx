@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
+import Header from './components/Header';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 // Usage :
@@ -24,7 +25,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Router>
-          {/*header*/}
+          <Header />
           <Routes>
             <Route path="/">
               <Route index element={<Home />} />
