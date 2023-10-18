@@ -1,58 +1,60 @@
-import { Box, ImageList, ImageListItem, Stack, Hidden } from '@mui/material';
-import Section from '@/components/Section';
+import { Box, Stack } from '@mui/material';
+import BestProducts from '@/pages/BestProducts';
+import FurnitureProducts from '@/pages/FunitureProducts';
+import ExclusiveDeals from '@/pages/ExclusiveDeals';
+import Ads from '@/components/Ads';
+import {
+  getDiscountProducts,
+  getDiscountProductsBycatalog
+} from '@/services/Walmart';
+import {
+  loadExclusiveDeals,
+  loadFurnitureProducts
+} from '@/app/reducers/walmartSlice.ts';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+// import Loading from '@/components/Loading';
 
 const Home = () => {
-  const testList = [
-    { name: '1', desp: '1', price: 1 },
-    { name: '2', desp: '2', price: 2 },
-    { name: '1', desp: '1', price: 1 },
-    { name: '2', desp: '2', price: 2 }
-  ];
-  return (
-    <Box>
-      <Stack direction="row" spacing={2}>
-        {/* Products */}
-        <Stack
-          direction="column"
-          sx={{ width: { md: 'calc(100% - 300px)', sm: '100%' } }}
-          spacing={3}
-        >
-          <Stack direction="column">
-            <Section
-              title="Best Deals On Electronics"
-              productPropsList={testList}
-            />
-          </Stack>
-          <Stack direction="column">
-            <Section
-              title="Exclusive Deals On Funitures"
-              productPropsList={testList}
-            />
-          </Stack>
-          <Stack direction="column">
-            <Section title="Exclusive Deals" productPropsList={testList} />
-          </Stack>
-        </Stack>
+  const cIId = '9767';
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      const data1 = await getDiscountProductsBycatalog(cIId);
 
-        {/* Ads */}
-        <Hidden mdDown>
-          <Stack direction="column" sx={{ width: '300px' }}>
-            <ImageList sx={{ width: '100%' }} cols={1}>
-              {[1, 2, 3].map((_, idx) => (
-                <ImageListItem key={idx}>
-                  <img
-                    srcSet="https://github.com/chuwa-fullstack-training/deals-on-demand/blob/main/client/src/assets/image15-2.png?raw=tru"
-                    src="https://github.com/chuwa-fullstack-training/deals-on-demand/blob/main/client/src/assets/image15-2.png?raw=true"
-                    alt="ads"
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
+      dispatch(loadFurnitureProducts({ furnitureProducts: data1 }));
+
+      const data2 = await getDiscountProducts();
+      dispatch(loadExclusiveDeals({ exclusiveDeals: data2 }));
+    })();
+  }, []);
+  return (
+    <>
+      <Box sx={{ padding: '30px 5%' }}>
+        <Stack direction="row" spacing={2}>
+          {/* Products */}
+          <Stack
+            direction="column"
+            sx={{ width: { md: 'calc(100% - 300px)', sm: '100%' } }}
+            spacing={3}
+          >
+            <Stack direction="column">
+              <BestProducts />
+            </Stack>
+            <Stack direction="column">
+              <FurnitureProducts />
+            </Stack>
+            <Stack direction="column">
+              {/*<Section title="Exclusive Deals" productPropsList={testList} />*/}
+              <ExclusiveDeals />
+            </Stack>
           </Stack>
-        </Hidden>
-      </Stack>
-    </Box>
+
+          {/* Ads */}
+          <Ads />
+        </Stack>
+      </Box>
+    </>
   );
 };
 
