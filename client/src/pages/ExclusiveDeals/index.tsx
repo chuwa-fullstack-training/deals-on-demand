@@ -1,8 +1,7 @@
 import React from 'react';
-import { styled, Typography } from '@mui/material';
-
-import WalmartProduct from '@/components/WalmartProduct';
 import { useSelector } from 'react-redux';
+import { styled, Typography } from '@mui/material';
+import WalmartProduct from '@/components/WalmartProduct';
 // import { loadExclusiveDeals } from '@/app/reducers/walmartSlice.ts';
 // import { getDiscountProducts } from '@/services/Walmart';
 import { RootState } from '@/app/store.ts';

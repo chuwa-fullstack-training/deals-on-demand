@@ -27,6 +27,7 @@ const initialState = {
   furnitureProducts: [],
   exclusiveDeals: []
 };
+
 const walmartSlice = createSlice({
   name: 'walmart',
   initialState,
