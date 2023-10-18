@@ -8,9 +8,13 @@
 /*  background: #000;*/
 /*}*/
 ::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
   /* width of the entire scrollbar */
 }
+/*-webkit-scrollbar-thumb {*/
+/*  background: #000;*/
+/*}*/
+
 
 ::-webkit-scrollbar-thumb {
   background-color: #1a1a1a33; /* color of the scroll thumb */
