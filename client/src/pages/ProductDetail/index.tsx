@@ -1,4 +1,6 @@
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Ads from '@/components/Ads';
 import {
   Box,
@@ -9,50 +11,13 @@ import {
   Paper,
   Stack
 } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store.ts';
-import { useEffect, useMemo, useState } from 'react';
 
-//amazon
-type amazonType = {
-  title: string;
-  id: string;
-  desc: string;
-  originalPrice: string;
-  currentPrice: string;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
-  image5: string;
-  image6: string;
-  clickURL: string;
-};
-//walmart
-type walmartType = {
-  wpId: number;
-  Id: string;
-  CatalogId: string;
-  CampaignId: string;
-  CampaignName: string;
-  CatalogItemId: string;
-  Name: string;
-  Description: string;
-  Manufacturer: string;
-  Url: string;
-  ImageUrl: string;
-  Currency: string;
-  StockAvailability: string;
-  Gtin: string;
-  Category: string;
-  SubCategory: string;
-  IsParent: string;
-  Text2: string;
-  Uri: string;
-  CurrentPrice: string;
-  OriginalPrice: string;
-  DiscountPercentage: string;
-};
+import { WalmartProduct as WalmartType } from '@/types/walmart';
+import { AmazonProduct as AmazonType } from '@/types/amazon';
+
+type ProductType = AmazonType | WalmartType | undefined;
+
 // {
 //   title: '0',
 //       id: '0',
@@ -92,7 +57,6 @@ type walmartType = {
 //     DiscountPercentage: '0'
 // }
 
-type productType = amazonType | walmartType | undefined;
 const ProductDetail = () => {
   const location = useLocation();
   const platform = location.pathname.split('/').slice(-2)[0];
@@ -100,7 +64,7 @@ const ProductDetail = () => {
   const amazonState = useSelector((state: RootState) => state.amazonReducer);
   const walmartState = useSelector((state: RootState) => state.walmartReducer);
 
-  const product: productType = useMemo(() => {
+  const product: ProductType = useMemo(() => {
     if (platform === 'amazon') {
       for (const values of Object.values(amazonState)) {
         const element = values.find(item => item.id === productId);

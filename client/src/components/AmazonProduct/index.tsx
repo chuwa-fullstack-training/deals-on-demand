@@ -1,25 +1,6 @@
-// import React from 'react';
-
 import { Box, Button, Paper, styled, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-// import { useEffect } from 'react';
-
-type Props = {
-  item: {
-    title: string;
-    id: string;
-    desc: string;
-    originalPrice: string;
-    currentPrice: string;
-    image1: string;
-    image2: string;
-    image3: string;
-    image4: string;
-    image5: string;
-    image6: string;
-    clickURL: string;
-  };
-};
+import { AmazonProduct as ItemType } from '@/types/amazon';
 
 const AmazonHorizontalSection = styled('div', {
   name: 'AmazonHorizontalSection',
@@ -40,11 +21,10 @@ const AmazonVerticalSection = styled('div', {
   justifyContent: 'start'
 }));
 
-const AmazonProduct = (props: Props) => {
-  // useEffect(() => {}, []);
+const AmazonProduct = ({ item }: { item: ItemType }) => {
   const navigate = useNavigate();
   const toDetails = () => {
-    navigate('/product/amazon/' + props.item.id);
+    navigate('/product/amazon/' + item.id);
   };
   return (
     <Paper sx={{ padding: '15px', margin: '0 10px' }} elevation={3}>
@@ -53,9 +33,9 @@ const AmazonProduct = (props: Props) => {
           <img
             style={{ height: 150 }}
             src={
-              props.item.image1.startsWith('../')
+              item.image1.startsWith('../')
                 ? 'https://avatars.githubusercontent.com/u/583231?v=4'
-                : props.item.image1
+                : item.image1
             }
             alt=""
           />
@@ -75,7 +55,7 @@ const AmazonProduct = (props: Props) => {
             }}
           >
             <Typography sx={{ fontSize: '11px', fontWeight: 600 }}>
-              {props.item.title}
+              {item.title}
             </Typography>
           </Box>
         </AmazonHorizontalSection>
@@ -86,14 +66,14 @@ const AmazonProduct = (props: Props) => {
           }}
         >
           <Box sx={{ display: 'flex', gap: '5px' }}>
-            {props.item.originalPrice !== props.item.currentPrice ? (
+            {item.originalPrice !== item.currentPrice ? (
               <Typography sx={{ fontSize: '13px', color: 'green' }}>
-                ${props.item.currentPrice}
+                ${item.currentPrice}
               </Typography>
             ) : (
               <></>
             )}
-            {props.item.originalPrice === '' ? (
+            {item.originalPrice === '' ? (
               <></>
             ) : (
               <Typography
@@ -102,7 +82,7 @@ const AmazonProduct = (props: Props) => {
                   textDecoration: 'line-through'
                 }}
               >
-                ${props.item.originalPrice}
+                ${item.originalPrice}
               </Typography>
             )}
           </Box>

@@ -1,36 +1,39 @@
 import { Box, Stack } from '@mui/material';
+import { useSelector } from 'react-redux';
 import BestProducts from '@/pages/BestProducts';
 import FurnitureProducts from '@/pages/FunitureProducts';
 import ExclusiveDeals from '@/pages/ExclusiveDeals';
 import Ads from '@/components/Ads';
+import Loading from '@/components/Loading';
+
 import {
-  getDiscountProducts,
-  getDiscountProductsBycatalog
+  useGetWalmartDataQuery,
+  useGetWalmartDataByCatalogQuery
 } from '@/services/Walmart';
-import {
-  loadExclusiveDeals,
-  loadFurnitureProducts
-} from '@/app/reducers/walmartSlice.ts';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-// import Loading from '@/components/Loading';
+import { RootState } from '@/app/store';
 
 const Home = () => {
   const cIId = '9767';
-  const dispatch = useDispatch();
-  useEffect(() => {
-    (async () => {
-      const data1 = await getDiscountProductsBycatalog(cIId);
 
-      dispatch(loadFurnitureProducts({ furnitureProducts: data1 }));
+  const { data, error, isLoading } = useGetWalmartDataQuery(null);
+  const {
+    data: dataByCatalog,
+    error: error2,
+    isLoading: isLoading2
+  } = useGetWalmartDataByCatalogQuery(cIId);
 
-      const data2 = await getDiscountProducts();
-      dispatch(loadExclusiveDeals({ exclusiveDeals: data2 }));
-    })();
-  }, []);
+  const bestProductList = useSelector(
+    (state: RootState) => state.amazonReducer
+  );
+
+  if (isLoading || isLoading2) return <Loading />;
+  if (error || error2) return <div>Something went wrong</div>;
+
+  console.log(data, dataByCatalog);
+
   return (
     <>
-      <Box sx={{ padding: '30px 5%' }}>
+      <Box sx={{ padding: '1rem' }}>
         <Stack direction="row" spacing={2}>
           {/* Products */}
           <Stack
@@ -39,14 +42,14 @@ const Home = () => {
             spacing={3}
           >
             <Stack direction="column">
-              <BestProducts />
+              <BestProducts productList={bestProductList} />
             </Stack>
             <Stack direction="column">
-              <FurnitureProducts />
+              <FurnitureProducts productList={dataByCatalog} />
             </Stack>
             <Stack direction="column">
               {/*<Section title="Exclusive Deals" productPropsList={testList} />*/}
-              <ExclusiveDeals />
+              <ExclusiveDeals productList={data} />
             </Stack>
           </Stack>
 

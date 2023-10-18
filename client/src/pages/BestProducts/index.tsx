@@ -1,8 +1,12 @@
 import React from 'react';
 import { styled, Typography } from '@mui/material';
 import AmazonProduct from '@/components/AmazonProduct';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/store.ts';
+import { AmazonProduct as ProductType } from '@/types/amazon';
+
+type ProductListType = {
+  list1: ProductType[];
+  list2: ProductType[];
+};
 
 const CustomHorizontalSection = styled('div', {
   name: 'CustomHorizontalSection',
@@ -26,8 +30,8 @@ const CustomVerticalSection = styled('div', {
   flexDirection: 'column',
   justifyContent: 'start'
 }));
-const BestProducts = () => {
-  const BestProducts = useSelector((state: RootState) => state.amazonReducer);
+const BestProducts = ({ productList }: { productList: ProductListType }) => {
+  // const BestProducts = useSelector((state: RootState) => state.amazonReducer);
   return (
     <React.Fragment>
       <CustomVerticalSection>
@@ -35,14 +39,14 @@ const BestProducts = () => {
           Best Deals On Electronics
         </Typography>
         <CustomHorizontalSection>
-          {BestProducts.list1.map((item, index) => (
+          {productList.list1.map((item, index) => (
             <div key={index}>
               <AmazonProduct item={item} />
             </div>
           ))}
         </CustomHorizontalSection>
         <CustomHorizontalSection>
-          {BestProducts.list2.map((item, index) => (
+          {productList.list2.map((item, index) => (
             <div key={index}>
               <AmazonProduct item={item} />
             </div>

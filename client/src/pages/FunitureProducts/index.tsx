@@ -1,10 +1,8 @@
 import React from 'react';
 import { styled, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
-// import { getDiscountProductsBycatalog } from '@/services/Walmart';
-// import { loadFurnitureProducts } from '@/app/reducers/walmartSlice.ts';
-import { RootState } from '@/app/store.ts';
-import { useSelector } from 'react-redux';
+import { WalmartProduct as WalmartType } from '@/types/walmart';
+
 // type walmartType = {
 //   wpId: number;
 //   Id: string;
@@ -51,11 +49,7 @@ const CustomVerticalSection = styled('div', {
   justifyContent: 'start'
 }));
 
-const FurnitureProducts = () => {
-  const furnitureList = useSelector(
-    (state: RootState) => state.walmartReducer.furnitureProducts
-  );
-
+const FurnitureProducts = ({ productList }: { productList: WalmartType[] }) => {
   return (
     <React.Fragment>
       <CustomVerticalSection>
@@ -63,7 +57,7 @@ const FurnitureProducts = () => {
           Best Deals On Electronics
         </Typography>
         <CustomHorizontalSection>
-          {furnitureList.map((item, index) => (
+          {productList.map((item, index) => (
             <div key={index}>
               <WalmartProduct item={item} />
             </div>

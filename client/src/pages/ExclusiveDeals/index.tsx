@@ -1,10 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { styled, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
-// import { loadExclusiveDeals } from '@/app/reducers/walmartSlice.ts';
-// import { getDiscountProducts } from '@/services/Walmart';
-import { RootState } from '@/app/store.ts';
+import { WalmartProduct as WalmartType } from '@/types/walmart';
 
 const ExclusiveHorizontalSection = styled('div', {
   name: 'ExclusiveHorizontalSection',
@@ -28,11 +25,7 @@ const ExclusiveVerticalSection = styled('div', {
   flexDirection: 'column',
   justifyContent: 'start'
 }));
-const ExclusiveDeals = () => {
-  // const [exclusiveDeals, setExclusiveDeals] = useState([]);
-  const exclusiveDeals = useSelector(
-    (state: RootState) => state.walmartReducer.exclusiveDeals
-  );
+const ExclusiveDeals = ({ productList }: { productList: WalmartType[] }) => {
   return (
     <React.Fragment>
       <ExclusiveVerticalSection>
@@ -40,7 +33,7 @@ const ExclusiveDeals = () => {
           Exclusive Deals On Furnitures
         </Typography>
         <ExclusiveHorizontalSection>
-          {exclusiveDeals.map((item, index) => (
+          {productList.map((item, index) => (
             <div key={index}>
               <WalmartProduct item={item} />
             </div>

@@ -1,15 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import walmartReducer from '@/app/reducers/walmartSlice';
 import amazonReducer from '@/app/reducers/amazonSlice';
+import { walmartApi } from '@/services/Walmart';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     walmartReducer,
-    amazonReducer
-  }
+    amazonReducer,
+    [walmartApi.reducerPath]: walmartApi.reducer
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(walmartApi.middleware)
 });
 
-export { store };
+setupListeners(store.dispatch);
 
 type RootState = ReturnType<typeof store.getState>;
 export type { RootState };
