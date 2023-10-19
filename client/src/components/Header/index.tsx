@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // Header.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -16,6 +16,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import logoSrc from '../../assets/logo.png';
 
 export const Header: React.FC = () => {
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const handleSearch = () => {
+    if (searchValue.trim()) {
+      console.log(searchValue);
+    }
+  };
+
   return (
     <>
       <div>
@@ -42,6 +50,13 @@ export const Header: React.FC = () => {
             >
               <InputBase
                 placeholder="What can we help you buy today"
+                value={searchValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchValue(e.target.value)
+                } // 2. Update state on input change with TypeScript type annotation
+                onKeyDown={(e: React.KeyboardEvent) => {
+                  if (e.key === 'Enter') handleSearch();
+                }}
                 sx={{
                   color: 'black',
                   padding: '0 8px',
@@ -63,6 +78,7 @@ export const Header: React.FC = () => {
                   transform: 'translateY(-50%)',
                   cursor: 'pointer'
                 }}
+                onClick={handleSearch}
               />
             </Box>
             <Box>
