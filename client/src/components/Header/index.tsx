@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, useEffect, useRef } from 'react';
+
 import {
   AppBar,
   Toolbar,
@@ -11,8 +14,64 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MenuIcon from '@mui/icons-material/Menu';
 import logoSrc from '../../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { getProductsBySearch } from '@/services/Walmart';
+
+function useClickOutside(
+  ref: React.RefObject<HTMLElement>,
+  callback: () => void
+) {
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, callback]);
+}
 
 export const Header: React.FC = () => {
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
+
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(searchContainerRef, () => {
+    if (searchResults.length > 0) {
+      setSearchResults([]);
+    }
+  });
+
+  useEffect(() => {
+    if (!searchValue) {
+      setSearchResults([]);
+    }
+    const timer = setTimeout(async () => {
+      if (searchValue.trim() !== '') {
+        setIsSearching(true);
+        const results = await getProductsBySearch(searchValue);
+        setSearchResults(results);
+        setIsSearching(false);
+        console.log(isSearching);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
+  }, [searchValue]);
+
+  const handleSearch = () => {
+    if (searchValue.trim()) {
+      navigate(`search?item=${searchValue}`);
+      setSearchValue('');
+    }
+  };
+
   return (
     <>
       <div>
@@ -21,7 +80,13 @@ export const Header: React.FC = () => {
           sx={{ backgroundColor: '#2d2d86', marginBottom: '8px' }}
         >
           <Toolbar>
-            <IconButton edge="start" color="inherit">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
               <img
                 src={logoSrc}
                 alt="logo"
@@ -30,6 +95,7 @@ export const Header: React.FC = () => {
               />
             </IconButton>
             <Box
+              ref={searchContainerRef}
               sx={{
                 position: 'relative',
                 marginLeft: 'auto',
@@ -39,6 +105,13 @@ export const Header: React.FC = () => {
             >
               <InputBase
                 placeholder="What can we help you buy today"
+                value={searchValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchValue(e.target.value)
+                }
+                onKeyDown={(e: React.KeyboardEvent) => {
+                  if (e.key === 'Enter') handleSearch();
+                }}
                 sx={{
                   color: 'black',
                   padding: '0 8px',
@@ -60,7 +133,42 @@ export const Header: React.FC = () => {
                   transform: 'translateY(-50%)',
                   cursor: 'pointer'
                 }}
+                onClick={handleSearch}
               />
+
+              {searchValue && searchResults.length > 0 && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    width: '100%',
+                    maxHeight: '300px',
+                    overflowY: 'auto',
+                    backgroundColor: 'white',
+                    borderRadius: '4px',
+                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+                    zIndex: 2
+                  }}
+                >
+                  {searchResults.map((result, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        padding: '8px 16px',
+                        borderBottom: '1px solid #e1e1e1',
+                        cursor: 'pointer',
+                        color: 'black',
+                        '&:hover': {
+                          backgroundColor: '#f5f5f5'
+                        }
+                      }}
+                    >
+                      {result}
+                    </Box>
+                  ))}
+                </Box>
+              )}
             </Box>
             <Box>
               <Button
@@ -91,6 +199,9 @@ export const Header: React.FC = () => {
             <Button
               color="inherit"
               sx={{ textTransform: 'none', padding: '0' }}
+              onClick={() => {
+                navigate('/');
+              }}
             >
               Top Deals
             </Button>

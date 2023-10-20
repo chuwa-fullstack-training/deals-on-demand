@@ -65,26 +65,28 @@ const ProductDetail = () => {
   const amazonState = useSelector((state: RootState) => state.amazonReducer);
   const walmartState = useSelector((state: RootState) => state.walmartReducer);
 
-  const product: ProductType = useMemo(() => {
+  const product: ProductType | null = useMemo(() => {
     if (platform === 'amazon') {
       for (const values of Object.values(amazonState)) {
         const element = values.find(item => item.id === productId);
         if (element !== undefined) return element;
       }
-      return undefined;
+      return null;
     } else if (platform === 'walmart') {
       // for (const values1 of Object.values(walmartState)) {
       //   const element1 = values1.find(item => item.Id === productId);
       //   if (element1 !== undefined) return element1;
       // }
-      return undefined;
+      return null;
     } else {
-      return undefined;
+      return null;
     }
   }, [amazonState, walmartState, productId, platform]);
+
   useEffect(() => {
     console.log(product);
   }, []);
+
   const [currentImg, setCurrentImg] = useState(product?.image1);
 
   return (

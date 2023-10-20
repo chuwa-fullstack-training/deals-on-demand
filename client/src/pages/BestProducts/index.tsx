@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
-import { Box, Button, Divider, Typography } from '@mui/material';
-import AmazonProduct from '@/components/AmazonProduct';
-import { AmazonProduct as ProductType } from '@/types/amazon';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import { Box, Button, Divider, Typography, useTheme } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import AmazonProduct from '@/components/AmazonProduct';
+import { AmazonProduct as ProductType } from '@/types/amazon';
+import { scrollTo } from '@/utils';
 
 type ProductListType = {
   list1: ProductType[];
@@ -12,17 +14,10 @@ type ProductListType = {
 };
 
 const BestProducts = ({ productList }: { productList: ProductListType }) => {
-  // const BestProducts = useSelector((state: RootState) => state.amazonReducer);
-  const scrollRef1 = useRef(null);
-  const scrollRef2 = useRef(null);
-  // const scroll = (
-  //   scrollRef: React.MutableRefObject<null>,
-  //   scrollOffset: number
-  // ) => {
-  // if (scrollRef.current != null) {
-  //   scrollRef.current.scrollLeft += scrollOffset;
-  // }
-  // };
+  const scrollRef1 = useRef<HTMLElement | null>(null);
+  const scrollRef2 = useRef<HTMLElement | null>(null);
+  const { breakpoints } = useTheme();
+  const mediumSizeMatches = useMediaQuery(breakpoints.up('md'));
 
   return (
     <React.Fragment>
@@ -45,7 +40,9 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
         <Box sx={{ display: 'flex', width: '100%' }}>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            // onClick={() => scroll(scrollRef1, -600)}
+            onClick={() =>
+              scrollTo(scrollRef1, mediumSizeMatches ? -300 : -150)
+            }
           >
             <ArrowBackIosIcon />
           </Button>
@@ -58,7 +55,8 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               alignItems: 'center',
               justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
-              height: '310px',
+              height: { md: 310, sm: 200, xs: 300 },
+
               margin: '10px 0',
               overflow: { sm: 'hidden' },
               overflowX: 'scroll',
@@ -73,7 +71,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           </Box>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            // onClick={() => scroll(scrollRef1, 600)}
+            onClick={() => scrollTo(scrollRef1, mediumSizeMatches ? 300 : 150)}
           >
             <ArrowForwardIosIcon />
           </Button>
@@ -94,7 +92,9 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
         <Box sx={{ display: 'flex', width: '100%' }}>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            // onClick={() => scroll(scrollRef2, -600)}
+            onClick={() =>
+              scrollTo(scrollRef2, mediumSizeMatches ? -300 : -150)
+            }
           >
             <ArrowBackIosIcon />
           </Button>
@@ -107,11 +107,11 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               alignItems: 'center',
               justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
-              height: '310px',
+
+              height: { md: 310, sm: 200, xs: 300 },
               margin: '10px 0',
               overflow: { sm: 'hidden' },
               overflowX: 'scroll',
-
               scrollBehavior: 'smooth'
             }}
           >
@@ -123,7 +123,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           </Box>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            // onClick={() => scroll(scrollRef2, 600)}
+            onClick={() => scrollTo(scrollRef2, mediumSizeMatches ? 300 : 150)}
           >
             <ArrowForwardIosIcon />
           </Button>
@@ -132,4 +132,5 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
     </React.Fragment>
   );
 };
+
 export default BestProducts;

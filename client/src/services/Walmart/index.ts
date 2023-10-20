@@ -24,7 +24,20 @@ const getDiscountProducts = async () => {
   });
   return response.data;
 };
-export { getDiscountProductsBycatalog, getDiscountProducts };
+
+const getProductsBySearch = async (searchValue: string) => {
+  const response = await axios({
+    url: `http://localhost:5001/walmart/search/${searchValue}`,
+    method: 'GET'
+  });
+  return response.data;
+};
+
+export {
+  getDiscountProductsBycatalog,
+  getDiscountProducts,
+  getProductsBySearch
+};
 
 export const walmartApi = createApi({
   reducerPath: 'walmartApi',
