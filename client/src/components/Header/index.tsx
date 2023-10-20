@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// Header.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -17,13 +16,39 @@ import logoSrc from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getProductsBySearch } from '@/services/Walmart';
 
+function useClickOutside(ref: React.RefObject<HTMLElement>, callback: () => void) {
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, callback]);
+}
+
+
 export const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(searchContainerRef, () => {
+    if (searchResults.length > 0) {
+      setSearchResults([]);
+    }
+  });
+
   useEffect(() => {
+    if (!searchValue) {
+      setSearchResults([]);
+    }
     const timer = setTimeout(async () => {
       if (searchValue.trim() !== '') {
         setIsSearching(true);
@@ -31,7 +56,7 @@ export const Header: React.FC = () => {
         setSearchResults(results);
         setIsSearching(false);
       }
-    }, 500); // 500ms delay
+    }, 300); 
 
     return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
   }, [searchValue]);
@@ -39,7 +64,7 @@ export const Header: React.FC = () => {
   const handleSearch = () => {
     if (searchValue.trim()) {
       navigate(`search?item=${searchValue}`);
-      setSearchValue("");
+      setSearchValue('');
     }
   };
 
@@ -66,6 +91,7 @@ export const Header: React.FC = () => {
               />
             </IconButton>
             <Box
+              ref={searchContainerRef}
               sx={{
                 position: 'relative',
                 marginLeft: 'auto',
@@ -78,7 +104,7 @@ export const Header: React.FC = () => {
                 value={searchValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setSearchValue(e.target.value)
-                } // 2. Update state on input change with TypeScript type annotation
+                } 
                 onKeyDown={(e: React.KeyboardEvent) => {
                   if (e.key === 'Enter') handleSearch();
                 }}
@@ -110,28 +136,27 @@ export const Header: React.FC = () => {
                 <Box
                   sx={{
                     position: 'absolute',
-                    top: '100%', // position it right below the input field
+                    top: '100%', 
                     left: 0,
                     width: '100%',
-                    maxHeight: '200px', // can adjust based on your needs
-                    overflowY: 'auto', // to scroll if results overflow the dropdown
+                    maxHeight: '300px', 
+                    overflowY: 'auto', 
                     backgroundColor: 'white',
                     borderRadius: '4px',
-                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)', // optional drop shadow for aesthetics
-                    zIndex: 2 // ensures it's on top of other content
+                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)', 
+                    zIndex: 2 
                   }}
                 >
                   {searchResults.map((result, index) => (
                     <Box
                       key={index}
-                      // onClick={}
                       sx={{
                         padding: '8px 16px',
-                        borderBottom: '1px solid #e1e1e1', // separator between results
+                        borderBottom: '1px solid #e1e1e1', 
                         cursor: 'pointer',
                         color: 'black',
                         '&:hover': {
-                          backgroundColor: '#f5f5f5' // hover effect
+                          backgroundColor: '#f5f5f5'
                         }
                       }}
                     >
@@ -140,7 +165,6 @@ export const Header: React.FC = () => {
                   ))}
                 </Box>
               )}
-
             </Box>
             <Box>
               <Button
