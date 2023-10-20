@@ -29,16 +29,15 @@ const Home = () => {
   if (isLoading || isLoading2) return <Loading />;
   if (error || error2) return <div>Something went wrong</div>;
 
-  console.log(data, dataByCatalog);
+  // console.log(data, dataByCatalog);
 
   return (
     <>
-      <Box sx={{ padding: '1rem' }}>
+      <Box sx={{ padding: { xs: '0', md: '1rem' } }}>
         <Stack direction="row" spacing={2}>
-          {/* Products */}
           <Stack
             direction="column"
-            sx={{ width: { md: 'calc(100% - 300px)', sm: '100%' } }}
+            sx={{ width: { md: 'calc(100% - 300px)', sm: '100%', xs: '100%' } }}
             spacing={3}
           >
             <Stack direction="column">
@@ -52,8 +51,6 @@ const Home = () => {
               <ExclusiveDeals productList={data} />
             </Stack>
           </Stack>
-
-          {/* Ads */}
           <Ads />
         </Stack>
       </Box>

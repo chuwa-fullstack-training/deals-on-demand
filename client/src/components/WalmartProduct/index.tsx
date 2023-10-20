@@ -4,39 +4,49 @@ import { WalmartProduct as ItemType } from '@/types/walmart';
 const CustomHorizontalBox = styled('div', {
   name: 'CustomHorizontalBox',
   slot: 'root'
-})(() => ({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'start',
-  margin: '5px 0'
-}));
-const CustomVerticalBox = styled('div', {
-  name: 'product',
-  slot: 'root'
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start'
-}));
+})(() => ({}));
+
 const WalmartProduct = ({ item }: { item: ItemType }) => {
   return (
     <Paper sx={{ padding: '15px', margin: '0 10px' }} elevation={3}>
-      <CustomVerticalBox sx={{ width: 250 }}>
-        <CustomHorizontalBox sx={{ justifyContent: 'center' }}>
+      <Box
+        sx={{
+          width: 250,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start'
+        }}
+      >
+        <Box
+          sx={{
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: '5px 0'
+          }}
+        >
           <img style={{ height: 150 }} src={item.ImageUrl} alt="" />
-        </CustomHorizontalBox>
-        <CustomHorizontalBox>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'start',
+            margin: '5px 0'
+          }}
+        >
           <Typography sx={{ fontSize: '10px' }}>Walmart</Typography>
-        </CustomHorizontalBox>
+        </Box>
         <CustomHorizontalBox>
           <Box
             component="div"
             sx={{
               textOverflow: 'ellipsis',
               overflow: 'hidden',
-              height: '33px',
-              lineHeight: '15px'
+              height: '33px'
+              // lineHeight: '15px'
             }}
           >
             <Typography sx={{ fontSize: '11px', fontWeight: 600 }}>
@@ -74,7 +84,7 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
           {/*onClick={()=>toProductDetail()}*/}
           <Button sx={{ fontSize: '10px' }}>View Deals</Button>
         </CustomHorizontalBox>
-      </CustomVerticalBox>
+      </Box>
     </Paper>
   );
 };

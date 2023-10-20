@@ -1,25 +1,6 @@
-import { Box, Button, Paper, styled, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { AmazonProduct as ItemType } from '@/types/amazon';
-
-const AmazonHorizontalSection = styled('div', {
-  name: 'AmazonHorizontalSection',
-  slot: 'root'
-})(() => ({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'start',
-  margin: '5px 0'
-}));
-const AmazonVerticalSection = styled('div', {
-  name: 'product',
-  slot: 'root'
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start'
-}));
 
 const AmazonProduct = ({ item }: { item: ItemType }) => {
   const navigate = useNavigate();
@@ -27,11 +8,30 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
     navigate('/product/amazon/' + item.id);
   };
   return (
-    <Paper sx={{ padding: '15px', margin: '0 10px' }} elevation={3}>
-      <AmazonVerticalSection sx={{ width: 250 }}>
-        <AmazonHorizontalSection sx={{ justifyContent: 'center' }}>
-          <img
-            style={{ height: 150 }}
+    <Paper
+      sx={{ padding: { xs: '5px', md: '15px' }, margin: '10px 10px' }}
+      elevation={3}
+    >
+      <Box
+        sx={{
+          width: { xs: 100, md: 250 },
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start'
+        }}
+      >
+        <Box
+          sx={{
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: '5px 0'
+          }}
+        >
+          <Box
+            component="img"
+            sx={{ height: { xs: 50, md: 150 } }}
             src={
               item.image1.startsWith('../')
                 ? 'https://avatars.githubusercontent.com/u/583231?v=4'
@@ -39,13 +39,24 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
             }
             alt=""
           />
-        </AmazonHorizontalSection>
-        <AmazonHorizontalSection>
-          <Typography sx={{ fontSize: '10px' }}>amazon</Typography>
-        </AmazonHorizontalSection>
-        <AmazonHorizontalSection>
+        </Box>
+        <Box>
+          <Typography
+            sx={{ fontSize: '10px', display: { xs: 'none', md: 'block' } }}
+          >
+            amazon
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            justifyContent: 'start',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: '5px 0'
+          }}
+        >
           <Box
-            component="div"
             sx={{
               textOverflow: 'ellipsis',
               overflow: 'hidden',
@@ -54,20 +65,34 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
               lineHeight: '15px'
             }}
           >
-            <Typography sx={{ fontSize: '11px', fontWeight: 600 }}>
+            <Typography
+              sx={{
+                fontSize: { xs: '10px', md: '11px' },
+                fontWeight: { xs: 400, md: 600 }
+              }}
+            >
               {item.title}
             </Typography>
           </Box>
-        </AmazonHorizontalSection>
+        </Box>
 
-        <AmazonHorizontalSection
-          style={{
-            justifyContent: 'space-between'
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            margin: '5px 0'
           }}
         >
-          <Box sx={{ display: 'flex', gap: '5px' }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '5px' }}>
             {item.originalPrice !== item.currentPrice ? (
-              <Typography sx={{ fontSize: '13px', color: 'green' }}>
+              <Typography
+                sx={{
+                  fontSize: '13px',
+                  color: 'green'
+                }}
+              >
                 ${item.currentPrice}
               </Typography>
             ) : (
@@ -89,8 +114,8 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
           <Button onClick={toDetails} sx={{ fontSize: '10px' }}>
             View Deals
           </Button>
-        </AmazonHorizontalSection>
-      </AmazonVerticalSection>
+        </Box>
+      </Box>
     </Paper>
   );
 };

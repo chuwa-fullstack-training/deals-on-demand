@@ -1,4 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+// title: 'Apple iPhone 13 (128GB, Blue) [Locked] + Carrier Subscription',
+//     id: '1',
+//     desc: '6.1-inch Super Retina XDR display, Cinematic mode adds shallow depth of field and shifts focus automatically in your videos,Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording,12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording,A15 Bionic chip for lightning-fast performance,Up to 19 hours of video playback,Durable design with Ceramic Shield,Industry-leading IP68 water resistance,5G capable,iOS 15 packs new features to do more with iPhone than ever before.',
+//     originalPrice: '',
+//     currentPrice: ' NA',
+//     image1: 'https://m.media-amazon.com/images/I/71xb2xkN5qL._FMwebp__.jpg',
+//     image2: 'https://m.media-amazon.com/images/I/61d8XHJuE2L._FMwebp__.jpg',
+//     image3: 'https://m.media-amazon.com/images/I/81junVbiuyL._FMwebp__.jpg',
+//     image4: 'https://m.media-amazon.com/images/I/817WqZsxjWL._FMwebp__.jpg',
+//     image5: 'https://m.media-amazon.com/images/I/8124IUirb7L._FMwebp__.jpg',
+//     image6: 'https://m.media-amazon.com/images/I/61wIVtrz54L._FMwebp__.jpg',
+//     clickURL:
+// 'https://www.amazon.com/Apple-iPhone-Locked-Carrier-Subscription/dp/B09G9F5RH5/ref=sr_1_1_sspa?crid=5UG1Z78RM1YX&amp;keywords=apple+iphone&amp;qid=1694364975&amp;sprefix=apple+ip%25252Caps%25252C147&amp;sr=8-1-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1&amp;_encoding=UTF8&amp;tag=ryzlink02-20&amp;linkCode=ur2&amp;linkId=e088f94e170c5ea5580b55099b510d99&amp;camp=1789&amp;creative=9325&_encoding=UTF8&tag=ryzlink02-20&linkCode=ur2&linkId=2de98194db2f7c10009905cd9585643e&camp=1789&creative=9325'
 
 const initialState = {
   list1: [
@@ -487,6 +500,7 @@ const initialState = {
     }
   ]
 };
+
 const amazonSlice = createSlice({
   name: 'amazon',
   initialState,
