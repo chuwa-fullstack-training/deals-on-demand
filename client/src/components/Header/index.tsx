@@ -30,7 +30,6 @@ function useClickOutside(ref: React.RefObject<HTMLElement>, callback: () => void
   }, [ref, callback]);
 }
 
-
 export const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<string[]>([]);
