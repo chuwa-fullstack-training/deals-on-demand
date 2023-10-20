@@ -1,4 +1,6 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import axios from 'axios';
+
 const getDiscountProductsBycatalog = async (cIId: string) => {
   // const url = 'http://localhost:5001/walmart/getDiscountsByCatalog/' + cIId;
   // const options = { method: 'GET' };
@@ -32,3 +34,21 @@ const getProductsBySearch = async (searchValue: string) => {
 }
 
 export { getDiscountProductsBycatalog, getDiscountProducts, getProductsBySearch };
+
+export const walmartApi = createApi({
+  reducerPath: 'walmartApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.BASE_URL || 'http://localhost:5001'
+  }),
+  endpoints: builder => ({
+    getWalmartData: builder.query({
+      query: () => 'walmart/getDiscounts/'
+    }),
+    getWalmartDataByCatalog: builder.query({
+      query: (cIId: string) => `walmart/getDiscountsByCatalog/${cIId}`
+    })
+  })
+});
+
+export const { useGetWalmartDataQuery, useGetWalmartDataByCatalogQuery } =
+  walmartApi;
