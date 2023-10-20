@@ -6,6 +6,8 @@ import { searchProducts } from '@/app/reducers/walmartSlice';
 import { RootState } from '@/app/store.ts';
 import Section3 from '@/pages/Section3';
 import { WalmartProduct } from '@/types/walmart';
+import Ads from '@/components/Ads';
+import { Box, Stack } from '@mui/material';
 
 // interface Product {
 //   Id: string;
@@ -32,12 +34,22 @@ const SearchedProducts: React.FC = () => {
   return (
     <>
       {searchedProducts.length !== 0 && (
-        <>
-          <Section3 productList={searchedProducts} from="search" />
-          {/*{searchedProducts.map(product => {*/}
-          {/*  return <div key={product.Id}>{product.Name}</div>;*/}
-          {/*})}*/}
-        </>
+        <Box sx={{ padding: { xs: '0', md: '1rem' } }}>
+          <Stack direction="row" spacing={2}>
+            <Stack
+              direction="column"
+              sx={{
+                width: { md: 'calc(100% - 300px)', sm: '100%', xs: '100%' }
+              }}
+              spacing={3}
+            >
+              <Stack direction="column">
+                <Section3 productList={searchedProducts} from="search" />
+              </Stack>
+            </Stack>
+            <Ads />
+          </Stack>
+        </Box>
       )}
     </>
   );
