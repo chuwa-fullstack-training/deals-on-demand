@@ -3,6 +3,29 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chuwa-fullstack-training/deals-on-demand/tree/main/client"
+  },
+  "author": {
+    "name": "chuwa-fullstack-training",
+    "email": "react.training@chuwaamerica.com"
+  },
+  "contributors": [
+    {
+      "name": "Li, Xuan",
+      "email": ""
+    },
+    {
+      "name": "Wang, Xiaoyun",
+      "email": ""
+    }
+  ],
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",

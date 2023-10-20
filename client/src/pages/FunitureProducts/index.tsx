@@ -4,6 +4,7 @@ import WalmartProduct from '@/components/WalmartProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { scrollTo } from '@/utils';
 
 // type walmartType = {
 //   wpId: number;
@@ -31,15 +32,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // };
 
 const FurnitureProducts = ({ productList }: { productList: WalmartType[] }) => {
-  const scrollRef1 = useRef(null);
-  // const scroll = (
-  //   scrollRef: React.MutableRefObject<null>,
-  //   scrollOffset: number
-  // ) => {
-  // if (scrollRef.current !== null) {
-  //   scrollRef.current.scrollLeft += scrollOffset;
-  // }
-  // };
+  const scrollRef1 = useRef<HTMLElement | null>(null);
 
   return (
     <React.Fragment>
@@ -61,7 +54,7 @@ const FurnitureProducts = ({ productList }: { productList: WalmartType[] }) => {
         <Box sx={{ display: 'flex', width: '100%' }}>
           <Button
             sx={{ borderRadius: '5px' }}
-            // onClick={() => scroll(scrollRef1, -600)}
+            onClick={() => scrollTo(scrollRef1, -300)}
           >
             <ArrowBackIosIcon />
           </Button>
@@ -87,7 +80,7 @@ const FurnitureProducts = ({ productList }: { productList: WalmartType[] }) => {
           </Box>
           <Button
             sx={{ borderRadius: '5px' }}
-            // onClick={() => scroll(scrollRef1, 600)}
+            onClick={() => scrollTo(scrollRef1, 300)}
           >
             <ArrowForwardIosIcon />
           </Button>
