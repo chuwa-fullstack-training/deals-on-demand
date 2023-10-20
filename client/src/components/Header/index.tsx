@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// Header.tsx
-import React from 'react';
 import {
   AppBar,
   Toolbar,

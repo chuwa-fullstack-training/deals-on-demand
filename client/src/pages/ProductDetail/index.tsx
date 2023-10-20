@@ -1,4 +1,6 @@
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Ads from '@/components/Ads';
 import {
   Box,
@@ -7,52 +9,16 @@ import {
   ImageList,
   ImageListItem,
   Paper,
-  Stack
+  Stack,
+  Typography
 } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store.ts';
-import { useEffect, useMemo, useState } from 'react';
 
-//amazon
-type amazonType = {
-  title: string;
-  id: string;
-  desc: string;
-  originalPrice: string;
-  currentPrice: string;
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
-  image5: string;
-  image6: string;
-  clickURL: string;
-};
-//walmart
-type walmartType = {
-  wpId: number;
-  Id: string;
-  CatalogId: string;
-  CampaignId: string;
-  CampaignName: string;
-  CatalogItemId: string;
-  Name: string;
-  Description: string;
-  Manufacturer: string;
-  Url: string;
-  ImageUrl: string;
-  Currency: string;
-  StockAvailability: string;
-  Gtin: string;
-  Category: string;
-  SubCategory: string;
-  IsParent: string;
-  Text2: string;
-  Uri: string;
-  CurrentPrice: string;
-  OriginalPrice: string;
-  DiscountPercentage: string;
-};
+import { WalmartProduct as WalmartType } from '@/types/walmart';
+import { AmazonProduct as AmazonType } from '@/types/amazon';
+
+type ProductType = AmazonType | WalmartType | undefined;
+
 // {
 //   title: '0',
 //       id: '0',
@@ -67,32 +33,31 @@ type walmartType = {
 //     image6: '0',
 //     clickURL: '0'
 // }
-// {
-//   wpId: 0,
-//       Id: '0',
-//     CatalogId: '0',
-//     CampaignId: '0',
-//     CampaignName: '0',
-//     CatalogItemId: '0',
-//     Name: '0',
-//     Description: '0',
-//     Manufacturer: '0',
-//     Url: '0',
-//     ImageUrl: '0',
-//     Currency: '0',
-//     StockAvailability: '0',
-//     Gtin: '0',
-//     Category: '0',
-//     SubCategory: '0',
-//     IsParent: '0',
-//     Text2: '0',
-//     Uri: '0',
-//     CurrentPrice: '0',
-//     OriginalPrice: '0',
-//     DiscountPercentage: '0'
-// }
 
-type productType = amazonType | walmartType | undefined;
+// {
+//     "wpId": 15321,
+//     "Id": "product_9767_774976869",
+//     "CatalogId": "9767",
+//     "CampaignId": "9383",
+//     "CampaignName": "Walmart Affiliate Program",
+//     "CatalogItemId": "774976869",
+//     "Name": "Mellow MAVN Upholstered Platform Bed  Modern Tufted Headboard  Real Wooden Slats and Legs  Dark Grey  King",
+//     "Description": "Mellow s Mavn upholstered platform bed features a modern tufted design and headboard with elegant curves and modern edges. The dark grey fabric headboard is detailed with curves complemented with clean  edged corners and layered with foam for comfort as you lean back and relax. The authentic solid wooden slats provide sturdy  durable support without the need for a separate box spring. The legs are also made with solid wood for stability and a refined modern look. Enjoy quick and easy assembly with a free ratchet and everything you need included in the package  no other tools required. The Mavn platform bed is available in Full  Queen and King sizes and comes with a 5-year manufacturer s warranty.",
+//     "Manufacturer": "Mellow",
+//     "Url": "https://goto.walmart.com/c/3917115/1285386/9383?prodsku=774976869&u=https%3A%2F%2Fwww.walmart.com%2Fip%2FMellow-MAVN-Upholstered-Platform-Bed-Modern-Tufted-Headboard-Real-Wooden-Slats-and-Legs-Dark-Grey-King%2F774976869&intsrc=APIG_9767",
+//     "ImageUrl": "https://i5.walmartimages.com/asr/102b75c2-3163-4499-b9fe-3085b9bb63a2_1.d0cdb4c43f5ac838b6f190f865398bd7.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
+//     "Currency": "USD",
+//     "StockAvailability": "InStock",
+//     "Gtin": "00842165126559",
+//     "Category": "Home>Furniture>Bedroom Furniture>Beds>Shop all Beds",
+//     "SubCategory": "Home Page/Home/Furniture/Bedroom Furniture/Beds/Shop all Beds",
+//     "IsParent": "false",
+//     "Text2": "Walmart.com",
+//     "Uri": "/Mediapartners/IRA4K3ySvbUh3917115tdrHHtKz6Y6tff1/Catalogs/9767/Items/product_9767_774976869",
+//     "CurrentPrice": "321.12",
+//     "OriginalPrice": "350.00",
+//     "DiscountPercentage": "8"
+// },
 const ProductDetail = () => {
   const location = useLocation();
   const platform = location.pathname.split('/').slice(-2)[0];
@@ -100,7 +65,7 @@ const ProductDetail = () => {
   const amazonState = useSelector((state: RootState) => state.amazonReducer);
   const walmartState = useSelector((state: RootState) => state.walmartReducer);
 
-  const product: productType = useMemo(() => {
+  const product: ProductType = useMemo(() => {
     if (platform === 'amazon') {
       for (const values of Object.values(amazonState)) {
         const element = values.find(item => item.id === productId);
@@ -123,80 +88,119 @@ const ProductDetail = () => {
   const [currentImg, setCurrentImg] = useState(product?.image1);
 
   return (
-    <>
-      <Box sx={{ display: 'flex', gap: 5, padding: '30px 5%' }}>
-        <Paper elevation={3} sx={{ width: '100%', height: '700px' }}>
-          <Stack
-            direction="row"
-            sx={{ width: '100%', height: '100%', display: 'flex', gap: '20px' }}
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        height: '100%',
+        width: '100%'
+      }}
+    >
+      <Paper
+        elevation={3}
+        sx={{
+          width: { xs: '100%', md: 800, lg: 900 },
+          height: '100%',
+          padding: { xs: '20px 10px', md: '30px' },
+          marginTop: '3%',
+          marginLeft: '5%'
+        }}
+      >
+        <Stack
+          direction="row"
+          sx={{
+            width: { xs: '100%' },
+            height: '100%',
+            display: 'flex',
+            gap: '20px',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: { xs: 'center', md: 'start' }
+          }}
+        >
+          <Box
+            sx={{
+              padding: '20px',
+              display: { xs: 'none', md: 'flex' }
+            }}
           >
-            <Box
-              style={{
-                border: '1px solid red',
-                padding: '20px'
-              }}
-            >
-              <ImageList cols={1}>
-                {[
-                  product?.image1,
-                  product?.image2,
-                  product?.image3,
-                  product?.image4,
-                  product?.image5,
-                  product?.image6
-                ].map((item, index) => (
-                  <ImageListItem key={index} style={{ width: '100px' }}>
-                    <img
-                      src={item}
-                      alt=""
-                      loading="lazy"
-                      onMouseEnter={() => {
-                        if (item !== undefined) setCurrentImg(item);
-                      }}
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-            </Box>
-            <Box
-              style={{
-                border: '1px solid red',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 20px'
-              }}
-            >
-              <img src={currentImg} alt="" style={{ width: '300px' }} />
-            </Box>
-            <Box style={{ border: '1px solid red', height: '100%' }}>
+            <ImageList cols={1} gap={40} sx={{ height: '100%' }}>
+              {[
+                product?.image1,
+                product?.image2,
+                product?.image3,
+                product?.image4,
+                product?.image5,
+                product?.image6
+              ].map((item, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    src={item}
+                    alt=""
+                    loading="lazy"
+                    onMouseEnter={() => {
+                      if (item !== undefined) setCurrentImg(item);
+                    }}
+                    style={{
+                      width: '90px',
+                      height: '40px',
+                      objectFit: 'contain'
+                    }}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </Box>
+          <Box
+            component="img"
+            sx={{
+              marginTop: '50px',
+              width: { xs: 200, sm: 200, md: 300 },
+              height: { xs: 200, sm: 200, md: 300 }
+            }}
+            src={currentImg}
+          />
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              width: { xs: '100%', md: 400 }
+            }}
+          >
+            <Typography variant={'h6'} sx={{ fontWeight: 600 }}>
               {product?.title}
-              amazon <Divider />
-              {product?.currentPrice} USD
-              <Divider />
+            </Typography>
+            <Typography variant={'subtitle2'}>Amazon</Typography>
+            <Divider />
+            <Typography variant={'h6'} sx={{ fontWeight: 600 }}>
+              ${product?.currentPrice} USD
+            </Typography>
+            <Divider />
+            <Typography variant={'subtitle2'} sx={{ fontWeight: 600 }}>
               About this item
-              {product?.desc}
-              <Divider />
-              <Button>Buy Now</Button>
+            </Typography>
+            <Box
+              sx={{
+                maxHeight: { xs: '100%', md: '400px' },
+                overflow: 'hidden',
+                overflowY: 'scroll'
+              }}
+            >
+              <Typography variant={'subtitle2'} sx={{ lineHeight: '2em' }}>
+                {product?.desc}
+              </Typography>
             </Box>
-          </Stack>
-        </Paper>
-        <Ads />
-      </Box>
-    </>
-  ); // title: 'Apple iPhone 13 (128GB, Blue) [Locked] + Carrier Subscription',
-  //     id: '1',
-  //     desc: '6.1-inch Super Retina XDR display, Cinematic mode adds shallow depth of field and shifts focus automatically in your videos,Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording,12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording,A15 Bionic chip for lightning-fast performance,Up to 19 hours of video playback,Durable design with Ceramic Shield,Industry-leading IP68 water resistance,5G capable,iOS 15 packs new features to do more with iPhone than ever before.',
-  //     originalPrice: '',
-  //     currentPrice: ' NA',
-  //     image1: 'https://m.media-amazon.com/images/I/71xb2xkN5qL._FMwebp__.jpg',
-  //     image2: 'https://m.media-amazon.com/images/I/61d8XHJuE2L._FMwebp__.jpg',
-  //     image3: 'https://m.media-amazon.com/images/I/81junVbiuyL._FMwebp__.jpg',
-  //     image4: 'https://m.media-amazon.com/images/I/817WqZsxjWL._FMwebp__.jpg',
-  //     image5: 'https://m.media-amazon.com/images/I/8124IUirb7L._FMwebp__.jpg',
-  //     image6: 'https://m.media-amazon.com/images/I/61wIVtrz54L._FMwebp__.jpg',
-  //     clickURL:
-  // 'https://www.amazon.com/Apple-iPhone-Locked-Carrier-Subscription/dp/B09G9F5RH5/ref=sr_1_1_sspa?crid=5UG1Z78RM1YX&amp;keywords=apple+iphone&amp;qid=1694364975&amp;sprefix=apple+ip%25252Caps%25252C147&amp;sr=8-1-spons&amp;sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&amp;psc=1&amp;_encoding=UTF8&amp;tag=ryzlink02-20&amp;linkCode=ur2&amp;linkId=e088f94e170c5ea5580b55099b510d99&amp;camp=1789&amp;creative=9325&_encoding=UTF8&tag=ryzlink02-20&linkCode=ur2&linkId=2de98194db2f7c10009905cd9585643e&camp=1789&creative=9325'
+
+            <Button variant="contained" sx={{ marginTop: '20px' }}>
+              <Typography variant={'subtitle2'}>Buy Now</Typography>
+            </Button>
+          </Box>
+        </Stack>
+      </Paper>
+      <Ads />
+    </Box>
+  );
 };
 
 export default ProductDetail;

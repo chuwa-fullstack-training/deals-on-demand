@@ -6,7 +6,6 @@ const Loading = () => {
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: '#bbbbbb99',
         position: 'fixed',
         zIndex: '10',
         display: 'flex',

@@ -1,52 +1,51 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { styled, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
-// import { loadExclusiveDeals } from '@/app/reducers/walmartSlice.ts';
-// import { getDiscountProducts } from '@/services/Walmart';
-import { RootState } from '@/app/store.ts';
+import { WalmartProduct as WalmartType } from '@/types/walmart';
 
-const ExclusiveHorizontalSection = styled('div', {
-  name: 'ExclusiveHorizontalSection',
-  slot: 'root'
-})(() => ({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  justifyContent: 'start',
-  height: '310px',
-  margin: '10px 0',
-  gap: '20px'
-}));
-const ExclusiveVerticalSection = styled('div', {
-  name: 'product',
-  slot: 'root'
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'start'
-}));
-const ExclusiveDeals = () => {
-  // const [exclusiveDeals, setExclusiveDeals] = useState([]);
-  const exclusiveDeals = useSelector(
-    (state: RootState) => state.walmartReducer.exclusiveDeals
-  );
+const ExclusiveDeals = ({ productList }: { productList: WalmartType[] }) => {
   return (
     <React.Fragment>
-      <ExclusiveVerticalSection>
-        <Typography variant="h6" fontWeight={600} sx={{ marginBottom: '10px' }}>
-          Exclusive Deals On Furnitures
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          // justifyContent: 'start',
+          alignItem: { xs: 'center', sm: 'center' },
+          marginLeft: { xs: '0', sm: '20px' }
+        }}
+      >
+        <Typography
+          variant="h6"
+          fontWeight={600}
+          sx={{
+            marginBottom: '10px',
+            display: 'flex',
+            justifyContent: { xs: 'center', sm: 'start' }
+          }}
+        >
+          Exclusive Deals
         </Typography>
-        <ExclusiveHorizontalSection>
-          {exclusiveDeals.map((item, index) => (
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: { xs: 'center', sm: 'start' },
+            height: '310px',
+            margin: { xs: '0 0 0 0', md: '10px 0 0 40px' },
+            gap: '20px'
+          }}
+        >
+          {productList.map((item, index) => (
             <div key={index}>
               <WalmartProduct item={item} />
             </div>
           ))}
-        </ExclusiveHorizontalSection>
-      </ExclusiveVerticalSection>
+        </Box>
+      </Box>
     </React.Fragment>
   );
 };
