@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // Header.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -14,13 +14,32 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import MenuIcon from '@mui/icons-material/Menu';
 import logoSrc from '../../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { getProductsBySearch } from '@/services/Walmart';
 
 export const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      if (searchValue.trim() !== '') {
+        setIsSearching(true);
+        const results = await getProductsBySearch(searchValue);
+        setSearchResults(results);
+        setIsSearching(false);
+      }
+    }, 500); // 500ms delay
+
+    return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
+  }, [searchValue]);
 
   const handleSearch = () => {
     if (searchValue.trim()) {
-      console.log(searchValue);
+      navigate(`search?item=${searchValue}`);
+      setSearchValue("");
     }
   };
 
@@ -32,7 +51,13 @@ export const Header: React.FC = () => {
           sx={{ backgroundColor: '#2d2d86', marginBottom: '8px' }}
         >
           <Toolbar>
-            <IconButton edge="start" color="inherit">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
               <img
                 src={logoSrc}
                 alt="logo"
@@ -80,6 +105,42 @@ export const Header: React.FC = () => {
                 }}
                 onClick={handleSearch}
               />
+
+              {searchValue && searchResults.length > 0 && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '100%', // position it right below the input field
+                    left: 0,
+                    width: '100%',
+                    maxHeight: '200px', // can adjust based on your needs
+                    overflowY: 'auto', // to scroll if results overflow the dropdown
+                    backgroundColor: 'white',
+                    borderRadius: '4px',
+                    boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)', // optional drop shadow for aesthetics
+                    zIndex: 2 // ensures it's on top of other content
+                  }}
+                >
+                  {searchResults.map((result, index) => (
+                    <Box
+                      key={index}
+                      // onClick={}
+                      sx={{
+                        padding: '8px 16px',
+                        borderBottom: '1px solid #e1e1e1', // separator between results
+                        cursor: 'pointer',
+                        color: 'black',
+                        '&:hover': {
+                          backgroundColor: '#f5f5f5' // hover effect
+                        }
+                      }}
+                    >
+                      {result.Name}
+                    </Box>
+                  ))}
+                </Box>
+              )}
+
             </Box>
             <Box>
               <Button
@@ -110,6 +171,9 @@ export const Header: React.FC = () => {
             <Button
               color="inherit"
               sx={{ textTransform: 'none', padding: '0' }}
+              onClick={() => {
+                navigate('/');
+              }}
             >
               Top Deals
             </Button>

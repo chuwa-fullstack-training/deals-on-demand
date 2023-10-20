@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
-
 import Header from './components/Header';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { store } from '@/app/store.ts';
 import ProductDetail from '@/pages/ProductDetail';
+import SearchedProducts from '@/pages/SearchedProducts';
 // import Loading from '@/components/Loading';
 
 // Usage :
@@ -41,6 +41,7 @@ function App() {
                   path="product/:platform/:productId"
                   element={<ProductDetail />}
                 />
+                <Route path="search" element={<SearchedProducts />} />
               </Route>
             </Routes>
             {/*footer*/}

@@ -25,7 +25,8 @@ import { createSlice } from '@reduxjs/toolkit';
 // },
 const initialState = {
   furnitureProducts: [],
-  exclusiveDeals: []
+  exclusiveDeals: [],
+  searchedProducts: [],
 };
 
 const walmartSlice = createSlice({
@@ -39,10 +40,14 @@ const walmartSlice = createSlice({
     loadExclusiveDeals: (state, action) => {
       state.exclusiveDeals = action.payload.exclusiveDeals;
       return state;
+    },
+    searchProducts: (state, action) => {
+      state.searchedProducts = action.payload.searchedProducts;
+      return state;
     }
   }
 });
 
-export const { loadFurnitureProducts, loadExclusiveDeals } =
+export const { loadFurnitureProducts, loadExclusiveDeals, searchProducts } =
   walmartSlice.actions;
 export default walmartSlice.reducer;
