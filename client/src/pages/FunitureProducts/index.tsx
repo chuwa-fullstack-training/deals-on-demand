@@ -4,6 +4,7 @@ import WalmartProduct from '@/components/WalmartProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import { scrollTo } from '@/utils';
 
 // type walmartType = {

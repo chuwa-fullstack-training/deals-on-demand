@@ -3,7 +3,13 @@ import { Box, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 
-const ExclusiveDeals = ({ productList }: { productList: WalmartType[] }) => {
+const ReusableWalmartProducts = ({
+  productList,
+  from
+}: {
+  productList: WalmartType[];
+  from: string;
+}) => {
   return (
     <React.Fragment>
       <Box
@@ -15,17 +21,33 @@ const ExclusiveDeals = ({ productList }: { productList: WalmartType[] }) => {
           marginLeft: { xs: '0', sm: '20px' }
         }}
       >
-        <Typography
-          variant="h6"
-          fontWeight={600}
-          sx={{
-            marginBottom: '10px',
-            display: 'flex',
-            justifyContent: { xs: 'center', sm: 'start' }
-          }}
-        >
-          Exclusive Deals
-        </Typography>
+        {from === 'search' ? (
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              marginBottom: '10px',
+              paddingLeft: '40px',
+              display: 'flex',
+              justifyContent: { xs: 'center', sm: 'start' }
+            }}
+          >
+            {productList.length} Search results
+          </Typography>
+        ) : (
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              marginBottom: '10px',
+              display: 'flex',
+              justifyContent: { xs: 'center', sm: 'start' }
+            }}
+          >
+            Exclusive Deals
+          </Typography>
+        )}
+
         <Box
           sx={{
             width: '100%',
@@ -49,4 +71,4 @@ const ExclusiveDeals = ({ productList }: { productList: WalmartType[] }) => {
     </React.Fragment>
   );
 };
-export default ExclusiveDeals;
+export default ReusableWalmartProducts;

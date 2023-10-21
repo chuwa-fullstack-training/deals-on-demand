@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+
 import { Box, Button, Divider, Typography, useTheme } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -55,6 +56,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
               height: { md: 310, sm: 200, xs: 300 },
+
               margin: '10px 0',
               overflow: { sm: 'hidden' },
               overflowX: 'scroll',
@@ -105,6 +107,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               alignItems: 'center',
               justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
+
               height: { md: 310, sm: 200, xs: 300 },
               margin: '10px 0',
               overflow: { sm: 'hidden' },

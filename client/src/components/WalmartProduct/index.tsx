@@ -1,10 +1,5 @@
-import { Box, Button, Paper, styled, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { WalmartProduct as ItemType } from '@/types/walmart';
-
-const CustomHorizontalBox = styled('div', {
-  name: 'CustomHorizontalBox',
-  slot: 'root'
-})(() => ({}));
 
 const WalmartProduct = ({ item }: { item: ItemType }) => {
   return (
@@ -39,7 +34,7 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
         >
           <Typography sx={{ fontSize: '10px' }}>Walmart</Typography>
         </Box>
-        <CustomHorizontalBox>
+        <Box>
           <Box
             component="div"
             sx={{
@@ -53,11 +48,14 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
               {item.Name}
             </Typography>
           </Box>
-        </CustomHorizontalBox>
+        </Box>
 
-        <CustomHorizontalBox
-          style={{
-            justifyContent: 'space-between'
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: '5px'
           }}
         >
           <Box sx={{ display: 'flex', gap: '5px' }}>
@@ -83,7 +81,7 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
           </Box>
           {/*onClick={()=>toProductDetail()}*/}
           <Button sx={{ fontSize: '10px' }}>View Deals</Button>
-        </CustomHorizontalBox>
+        </Box>
       </Box>
     </Paper>
   );
