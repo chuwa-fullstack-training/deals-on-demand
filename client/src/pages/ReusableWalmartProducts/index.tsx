@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 
-const Section3 = ({
+const ReusableWalmartProducts = ({
   productList,
   from
 }: {
@@ -71,4 +71,4 @@ const Section3 = ({
     </React.Fragment>
   );
 };
-export default Section3;
+export default ReusableWalmartProducts;

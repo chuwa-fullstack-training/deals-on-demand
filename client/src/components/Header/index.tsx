@@ -16,23 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import logoSrc from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getProductsBySearch } from '@/services/Walmart';
-
-function useClickOutside(
-  ref: React.RefObject<HTMLElement>,
-  callback: () => void
-) {
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback();
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref, callback]);
-}
+import { useClickOutside } from '@/utils/hooks';
 
 type SearchResult = {
   Name: string;
@@ -76,9 +60,7 @@ export const Header: React.FC = () => {
     }
   };
 
-  const handleClickSearchItem = () => {
-    
-  }
+  const handleClickSearchItem = () => {};
 
   return (
     <>
