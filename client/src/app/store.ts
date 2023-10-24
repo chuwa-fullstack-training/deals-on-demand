@@ -14,7 +14,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat(walmartApi.middleware)
 });
 
-setupListeners(store.dispatch);
-
 type RootState = ReturnType<typeof store.getState>;
 export type { RootState };
+
+setupListeners(store.dispatch);
