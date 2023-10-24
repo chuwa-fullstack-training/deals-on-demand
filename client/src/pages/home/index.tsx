@@ -2,7 +2,8 @@ import { Box, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import BestProducts from '@/pages/BestProducts';
 import FurnitureProducts from '@/pages/FunitureProducts';
-import Section3 from '@/pages/Section3';
+
+import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
 
@@ -48,7 +49,8 @@ const Home = () => {
             </Stack>
             <Stack direction="column">
               {/*<Section title="Exclusive Deals" productPropsList={testList} />*/}
-              <Section3 productList={data} from="home" />
+
+              <ReusableWalmartProducts productList={data} from="home" />
             </Stack>
           </Stack>
           <Ads />

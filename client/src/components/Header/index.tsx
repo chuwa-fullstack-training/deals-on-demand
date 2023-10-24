@@ -17,26 +17,15 @@ import logoSrc from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getProductsBySearch } from '@/services/Walmart';
 
-function useClickOutside(
-  ref: React.RefObject<HTMLElement>,
-  callback: () => void
-) {
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback();
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref, callback]);
-}
+import { useClickOutside } from '@/utils/hooks';
+
+type SearchResult = {
+  Name: string;
+};
 
 export const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
@@ -71,6 +60,8 @@ export const Header: React.FC = () => {
       setSearchValue('');
     }
   };
+
+  const handleClickSearchItem = () => {};
 
   return (
     <>
@@ -154,6 +145,7 @@ export const Header: React.FC = () => {
                   {searchResults.map((result, index) => (
                     <Box
                       key={index}
+                      onClick={handleClickSearchItem}
                       sx={{
                         padding: '8px 16px',
                         borderBottom: '1px solid #e1e1e1',
@@ -164,7 +156,7 @@ export const Header: React.FC = () => {
                         }
                       }}
                     >
-                      {result}
+                      {result.Name}
                     </Box>
                   ))}
                 </Box>
