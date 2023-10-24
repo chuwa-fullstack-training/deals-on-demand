@@ -6,8 +6,14 @@ import {
   Toolbar,
   IconButton,
   InputBase,
+  ButtonBase,
   Button,
-  Box
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -25,7 +31,8 @@ type SearchResult = {
 export const Header: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -52,6 +59,15 @@ export const Header: React.FC = () => {
 
     return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
   }, [searchValue]);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(prev => !prev);
+  };
+
+  const handleDealClick = () => {
+    console.log('Deals clicked');
+    setDrawerOpen(false);
+  };
 
   const handleSearch = () => {
     if (searchValue.trim()) {
@@ -161,7 +177,11 @@ export const Header: React.FC = () => {
                 </Box>
               )}
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: { xs: 'none', sm: 'flex' }
+              }}
+            >
               <Button
                 color="inherit"
                 startIcon={<NotificationsNoneIcon />}
@@ -184,9 +204,24 @@ export const Header: React.FC = () => {
                 Account
               </Button>
             </Box>
+            <IconButton
+              color="inherit"
+              onClick={handleDrawerToggle}
+              sx={{
+                display: { xs: 'block', sm: 'none' }
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Toolbar>
           <Box sx={{ backgroundColor: 'white', height: '2px' }} />
-          <Toolbar sx={{ width: '60%', justifyContent: 'space-between' }}>
+          <Toolbar
+            sx={{
+              width: { xs: '90%', sm: '60%' },
+              justifyContent: 'space-between',
+              gap: 1
+            }}
+          >
             <Button
               color="inherit"
               sx={{ textTransform: 'none', padding: '0' }}
@@ -222,6 +257,46 @@ export const Header: React.FC = () => {
             </Button>
           </Toolbar>
         </AppBar>
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          sx={{
+            width: '40%',
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: '40%'
+            }
+          }}
+        >
+          <List
+          // sx={{
+          //   display: 'flex',
+          //   flexDirection: 'column',
+          //   justifyContent: 'center',
+          //   height: '100%'
+          // }}
+          >
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <NotificationsNoneIcon />
+              </ListItemIcon>
+              <ListItemText primary="Deals" />
+            </ListItem>
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Menu" />
+            </ListItem>
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText primary="Account" />
+            </ListItem>
+          </List>
+        </Drawer>
       </div>
     </>
   );
