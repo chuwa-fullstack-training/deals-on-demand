@@ -8,6 +8,7 @@ import {
   Divider,
   ImageList,
   ImageListItem,
+  Link,
   Paper,
   Stack,
   Typography
@@ -194,8 +195,14 @@ const ProductDetail = () => {
               </Typography>
             </Box>
 
-            <Button variant="contained" sx={{ marginTop: '20px' }}>
-              <Typography variant={'subtitle2'}>Buy Now</Typography>
+            <Button
+              LinkComponent={Link}
+              href={product?.clickURL || ''}
+              target="_blank"
+              variant="contained"
+              sx={{ marginTop: '20px' }}
+            >
+              Buy Now
             </Button>
           </Box>
         </Stack>
