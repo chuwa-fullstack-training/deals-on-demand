@@ -5,9 +5,8 @@ import Header from './components/Header';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { store } from '@/app/store.ts';
-import ProductDetail from '@/pages/ProductDetail';
 import SearchedProducts from '@/pages/SearchedProducts';
-// import Loading from '@/components/Loading';
+import ProductDetail from '@/pages/ProductDetail';
 
 // Usage :
 // <Button sx={{ color: "primary.main" }}></Button>
@@ -31,7 +30,6 @@ function App() {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Router>
-            {/*<Loading />*/}
             <Header />
             <Routes>
               <Route path="/">

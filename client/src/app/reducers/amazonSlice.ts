@@ -309,7 +309,7 @@ const initialState = {
     {
       title:
         'Lenovo IdeaPad, 20GB RAM, 1TB SSD, AMD Dual-core Processor, 15.6 Inch HD Anti-Glare Display, Long Battery Life Up to 9.5Hr, HDMI, SD Card Reader, Windows 11, 1 Year Microsoft 365',
-      id: '1',
+      id: '1001',
       desc: '【Processor】AMD Athlon Processor 2.3 GHz (4M Cache, up to 3.2 GHz, 2 cores) for Fast and Snappy Performance.【Memory and Storage】20GB High bandwidth RAM to Smoothly Run Multiple Applications and Browser Tabs All at Once. Hard Drive is 1TB PCIe Solid State Drive (SSD) with 128GB eMMC Starup Disk which Allows to Fast Boot-up and Data Transfer.【Display】 15.6 HD (1366x768) Anti-glare Screen, Energy-efficient LED backlight giving you more viewing area and less clutter, on a crystal-clear HD screen.【Operating System】 Windows 11 Home in S mode. You may switch Win 11 S mode to the regular Win 11【Office 365 for one year】 Get full access to Microsoft Excel, Word, PowerPoint, OneNote, Access, and 1 TB of One Drive storage for 1 year.',
       originalPrice: '439.99',
       currentPrice: ' 417.55',
@@ -325,7 +325,7 @@ const initialState = {
     {
       title:
         'lenovo 14" FHD Ideapad 3 Newest Laptop, 20GB RAM, 512GB PCIe SSD,Intel Dual Core Processor(Up to 4.1GHz), WiFi, Webcam, Bluetooth, HDMI, Windows 11 S+ Accessories',
-      id: '2',
+      id: '1002',
       desc: '【Processor】11th Gen Intel Core i3-1115G4, 2 Cores & 4 Threads, up to 4.10 GHz Max Turbo Frequency, 6MB L3 Cache, enough for light daily office use, office, Ensures smooth use of office software, communication software and web pages, Ultra-low power consumption can effectively improve the battery life of the laptop.【Display】14 inch Full HD (1920x1080) display. Intel UHD Graphics【Upgraded to 20GB RAM & 512GB PCIe SSD】Speedy solid-state drive for seanless performance and reliable multitasking, allows to fast bootup and data transfer.【Ports】1 x USB 2.0, 2 x USB 3.2 Gen 1,1 x HDMI, 1 x Card reader, 1 x Power connector.【Windows 11 Home in S mode】You may switch to regular windows 11: Press "Start button" bottom left of the screen; Select "Settings" icon above "power" icon;Select "Activation", then Go to Store; Select Get option under "Switch out of S mode"; Hit Install. (If you also see an "Upgrade your edition of Windows" section, be careful not to click the "Go to the Store" link that appears there.',
       originalPrice: '',
       currentPrice: '389.99',
@@ -341,7 +341,7 @@ const initialState = {
     {
       title:
         'Lenovo 2022 Newest Ideapad 3 Laptop, 15.6" HD Touchscreen, 11th Gen Intel Core i3-1115G4 Processor, 8GB DDR4 RAM, 256GB PCIe NVMe SSD, HDMI, Webcam, Wi-Fi 5, Bluetooth, Windows 11 Home, Almond',
-      id: '3',
+      id: '1003',
       desc: '【Memory & Storage】Memory is 8GB high-bandwidth RAM to smoothly run multiple applications and browser tabs all at once. Hard Drive is 256GB PCIe Solid State Drive which allows to fast bootup and data transfer【Processor】11th Gen Intel Core i3-1115G4 Dual-Core 3.0GHz Processor (6MB Intel Smart Cache, up to 4.10GHz) Intel UHD Graphics【Screen】15.6" HD Touchscreen (1366 x 768) Display【Ports】2 x USB 3.2 Gen 1 Type-A, 1 x USB 2.0 Type-A, 1 x HDMI, 1 x Combination Audio Jack, 1 x Multi-format SD Media Card Reader, Wireless-AC Wi-Fi 5 + Bluetooth Combo【Operating System】Windows 11 Home',
       originalPrice: '959.00',
       currentPrice: ' 419.00',
@@ -357,7 +357,7 @@ const initialState = {
     {
       title:
         'Lenovo Tab M8 (4th Gen) - 2023 - Tablet - Long Battery Life - 8" HD - Front 2MP & Rear 5MP Camera - 2GB Memory - 32GB Storage - Android 12 (Go Edition) or Later,Gray',
-      id: '4',
+      id: '1004',
       desc: 'Pocketable Entertainment: Tap into on-the-go fun for you or your kids with a slim-and-light 8-inch HD display and powerful dual speakers. Get one Tab M8 (4th gen) for each member of the household. All Day Fun: Pack full power to sustain an entire day for kids to learn and grow on day and road trips with up to 16 hours of streaming on the 5100 mAh battery Safer Screen Time: The Lenovo Tab M8 (4th Gen) is TÜV Eye Care Certified. It protects sensitive eyes by reducing harmful blue light emissions. Turn on Reading Mode for a more realistic and immersive reading experience that lets you read for longer Greater Peace of Mind: Safeguard yourself and your family with a privacy dashboard that lets you manage your privacy permission accesses. Know when your camera and microphone is on through the camera and microphone indicator for greater peace of mind. Help Your Family Create Better Digital Habits: With parental controls in the Family Link app from Google, you can guide your child’s experience by managing content, setting screen time limits, and more, all from your own device.',
       originalPrice: '109.99',
       currentPrice: ' 78.99',
@@ -373,7 +373,7 @@ const initialState = {
     {
       title:
         'Lenovo IdeaPad 3 – (2023) - Everyday Notebook - Windows 11-14" Full HD – 8GB Memory – 128GB Storage - Intel Core i3-1115G - Platinum Grey',
-      id: '5',
+      id: '1005',
       desc: 'Expect more from your entertainment: Dolby Audio delivers crystal-clear sound. Whether you’re watching a video, streaming music, or video chatting, you’re sure to love what you hear on the IdeaPad 3. See more, Do more: A narrow bezel on 2 sides makes for a clean design  and larger display, giving you more viewing area and less clutter.Privacy at your fingertips: Keep your privacy intact with a physical shutter for your webcam for peace of mind when you need it.Big-time entertainment in a thin and light design: Experience entertainment like never before on thin & light devices, powered by an Intel Core processor with integrated Intel UHD graphics. Work and play from anywhere: A built-in 720p camera with a dual microphone and a battery that lasts up to 7.5 hours gives you the freedom to work or play where you want, when you want.',
       originalPrice: '299.99',
       currentPrice: '277.80',
@@ -389,7 +389,7 @@ const initialState = {
     {
       title:
         'Apple iMac 27-Inch Desktop, 3.4 GHz Intel Core i7 Processor, 16 GB memory, 1TB HDD (Renewed),macOS High Sierra',
-      id: '6',
+      id: '1006',
       desc: 'This pre-owned product has been professionally inspected, tested and cleaned by Amazon qualified vendors. It is not certified by Apple.This product is in "Excellent condition". The screen and body show no signs of cosmetic damage visible from 12 inches away.This product will have a battery that exceeds 80% capacity relative to new. Accessories may not be original, but will be compatible and fully functional. Product may come in generic box. This product is eligible for a replacement or refund within 90 days of receipt if it does not work as expected.',
       originalPrice: '',
       currentPrice: '1500.00',
@@ -405,7 +405,7 @@ const initialState = {
     {
       title:
         'Apple iMac MK452LL/A 21.5-Inch 4K Retina Display Intel Core i5 3.1GHz 16GB RAM 1TB HDD (Renewed) Mac OS X',
-      id: '7',
+      id: '1007',
       desc: 'Intel i5-5675r 3.1ghz, 16GB 1867 MHz DDR3 RAM, 1TB HDD,21.5" LCD; 4096 x 2304; Intel Iris Pro 6200 Graphics',
       originalPrice: '',
       currentPrice: '598.99',
@@ -421,7 +421,7 @@ const initialState = {
     {
       title:
         'Apple iMac MK462LL/A 27-inch Desktop Intel 5K Display 16GB Ram | 1TB Hard Drive (Renewed), Mac OS X',
-      id: '8',
+      id: '1008',
       desc: '27-inch (diagonal) Retina 5K display with IPS technology (5120x2880)3.2GHz quad-core Intel Core i5, AMD Radeon R9 M380 graphics processor 16GB of 1867MHz DDR3 memory, 1TB (7200-rpm) Hard Drive FaceTime HD camera 802.11ac Wi-Fi wireless networking, Bluetooth 4.0 wireless technology, Mac OS',
       originalPrice: '',
       currentPrice: '1050.00',
@@ -437,7 +437,7 @@ const initialState = {
     {
       title:
         '2021 Apple iMac (24-inch, Apple M1 chip with 8‑core CPU and 7‑core GPU, 8GB RAM, 256GB) - Blue (Renewed)macOS Sierra',
-      id: '9',
+      id: '1009',
       desc: 'Immersive 24-inch 4.5K Retina display with P3 wide color gamut and 500 nits of brightness; Apple M1 chip delivers powerful performance with 7-core CPU and 7-core GPU; Strikingly thin 11.5 mm design in vibrant colors 1080p FaceTime HD camera with M1 ISP for amazing video quality; Studio-quality three-mic array for crystal clear calls and voice recordings',
       originalPrice: '1294.99',
       currentPrice: '337.99',
@@ -453,7 +453,7 @@ const initialState = {
     {
       title:
         '2019 Apple iMac with Retina 4K/3.6 GHz Intel Core i3 Quad-Core (21.5-Inch, 8GB RAM, 1TB) - Silver (Renewed)',
-      id: '10',
+      id: '1010',
       desc: 'This pre-owned product has been professionally inspected, tested and cleaned by Amazon qualified vendors. It is not certified by Apple.This product is in Excellent condition. The screen and body show no signs of cosmetic damage visible from 12 inches away. This product will have a battery that exceeds 80% capacity relative to new. Accessories may not be original, but will be compatible and fully functional. Product may come in generic box. This product is eligible for a replacement or refund within 90 days of receipt if it does not work as expected.',
       originalPrice: '1,007.95',
       currentPrice: '589.07',
@@ -469,7 +469,7 @@ const initialState = {
     {
       title:
         'Apple 21.5" iMac Desktop Computer, Intel Core i5-7360U, 8GB RAM, 1TB HDD, MMQA2LL/A (Renewed)',
-      id: '11',
+      id: '1011',
       desc: '2.3 GHz Intel Core i5-7360U Dual-Core; 8GB of DDR4 RAM | 1TB Hard Drive; 21.5-inch LED-backlit Widescreen IPS display (1920 x 1080); Integrated Intel Iris Plus Graphics 640; Mac OS 10.12 pre-installed',
       originalPrice: '',
       currentPrice: '414.99',
@@ -485,7 +485,7 @@ const initialState = {
     {
       title:
         '2021 Apple iMac with Apple M1 chip 8-core CPU (24-inch, 8GB RAM, 256GB) (QWERTY English) Pink (Renewed Premium)',
-      id: '12',
+      id: '1012',
       desc: 'Immersive 24-inch 4.5K Retina display with P3 wide color gamut and 500 nits of brightness; Apple M1 chip delivers powerful performance with 8-core CPU and 8-core GPU; Strikingly thin 11.5 mm design in vibrant colors; 1080p FaceTime HD camera with M1 ISP for amazing video quality; Studio-quality three-mic array for crystal clear calls and voice recordings',
       originalPrice: '1,099.00',
       currentPrice: '1,049.00',

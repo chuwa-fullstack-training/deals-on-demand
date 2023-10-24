@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { WalmartProduct as WalmartType } from '@/types/walmart';
 // {
 //     "wpId": 15321,
 //     "Id": "product_9767_774976869",
@@ -23,7 +24,11 @@ import { createSlice } from '@reduxjs/toolkit';
 //     "OriginalPrice": "350.00",
 //     "DiscountPercentage": "8"
 // },
-const initialState = {
+const initialState: {
+  furnitureProducts: WalmartType[];
+  exclusiveDeals: WalmartType[];
+  searchedProducts: WalmartType[];
+} = {
   furnitureProducts: [],
   exclusiveDeals: [],
   searchedProducts: []
@@ -35,10 +40,12 @@ const walmartSlice = createSlice({
   reducers: {
     loadFurnitureProducts: (state, action) => {
       state.furnitureProducts = action.payload.furnitureProducts;
+      console.log(state.furnitureProducts);
       return state;
     },
     loadExclusiveDeals: (state, action) => {
       state.exclusiveDeals = action.payload.exclusiveDeals;
+      console.log(state.exclusiveDeals);
       return state;
     },
     searchProducts: (state, action) => {

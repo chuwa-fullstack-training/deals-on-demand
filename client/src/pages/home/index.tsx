@@ -12,6 +12,11 @@ import {
   useGetWalmartDataByCatalogQuery
 } from '@/services/Walmart';
 import { RootState } from '@/app/store';
+// import { useEffect } from 'react';
+// import {
+//   loadExclusiveDeals,
+//   loadFurnitureProducts
+// } from '@/app/reducers/walmartSlice.ts';
 
 const Home = () => {
   const cIId = '9767';
@@ -26,6 +31,12 @@ const Home = () => {
   const bestProductList = useSelector(
     (state: RootState) => state.amazonReducer
   );
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log(data, dataByCatalog);
+  //   dispatch(loadFurnitureProducts({ furnitureProducts: data }));
+  //   dispatch(loadExclusiveDeals({ exclusiveDeals: dataByCatalog }));
+  // }, []);
 
   if (isLoading || isLoading2) return <Loading />;
   if (error || error2) return <div>Something went wrong</div>;
@@ -49,7 +60,6 @@ const Home = () => {
             </Stack>
             <Stack direction="column">
               {/*<Section title="Exclusive Deals" productPropsList={testList} />*/}
-
               <ReusableWalmartProducts productList={data} from="home" />
             </Stack>
           </Stack>
