@@ -68,41 +68,17 @@ const ProductDetail = () => {
         );
         if (element !== undefined) return element;
       }
-      return {
-        wpId: 15321,
-        Id: 'product_9767_774976869',
-        CatalogId: '9767',
-        CampaignId: '9383',
-        CampaignName: 'Walmart Affiliate Program',
-        CatalogItemId: '774976869',
-        Name: 'Need backend api search',
-        Description: 'Need data',
-        Manufacturer: 'Need data',
-        Url: 'https://goto.walmart.com/c/3917115/1285386/9383?prodsku=774976869&u=https%3A%2F%2Fwww.walmart.com%2Fip%2FMellow-MAVN-Upholstered-Platform-Bed-Modern-Tufted-Headboard-Real-Wooden-Slats-and-Legs-Dark-Grey-King%2F774976869&intsrc=APIG_9767',
-        ImageUrl:
-          'https://i5.walmartimages.com/asr/102b75c2-3163-4499-b9fe-3085b9bb63a2_1.d0cdb4c43f5ac838b6f190f865398bd7.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff',
-        Currency: 'USD',
-        StockAvailability: 'InStock',
-        Gtin: '00842165126559',
-        Category: 'Home>Furniture>Bedroom Furniture>Beds>Shop all Beds',
-        SubCategory:
-          'Home Page/Home/Furniture/Bedroom Furniture/Beds/Shop all Beds',
-        IsParent: 'false',
-        Text2: 'Walmart.com',
-        Uri: '/Mediapartners/IRA4K3ySvbUh3917115tdrHHtKz6Y6tff1/Catalogs/9767/Items/product_9767_774976869',
-        CurrentPrice: 'Need data',
-        OriginalPrice: 'Need data',
-        DiscountPercentage: '8'
-      };
+      return null;
     } else {
       return null;
     }
   }, [amazonState, walmartState, productId, platform]);
 
   useEffect(() => {
-    // document.location = '#';
-  }, []);
+    window.scrollTo(0, 0);
+  }, [product]);
 
+  // product null handle navigate to error page
   const [currentImg, setCurrentImg] = useState(() => {
     if (isAmazon(product)) {
       return product.image1;
@@ -115,14 +91,15 @@ const ProductDetail = () => {
 
   const productImageList = useMemo(() => {
     if (isAmazon(product)) {
-      return [
-        product?.image1,
-        product?.image2,
-        product?.image3,
-        product?.image4,
-        product?.image5,
-        product?.image6
-      ];
+      const newImageList = [];
+      if (product.image1 !== '') newImageList.push(product.image1);
+      if (product.image2 !== '') newImageList.push(product.image2);
+      if (product.image3 !== '') newImageList.push(product.image3);
+      if (product.image4 !== '') newImageList.push(product.image4);
+      if (product.image5 !== '') newImageList.push(product.image5);
+      if (product.image6 !== '') newImageList.push(product.image6);
+
+      return newImageList;
     } else if (isWalmart(product)) {
       return [product?.ImageUrl];
     } else {
@@ -206,8 +183,8 @@ const ProductDetail = () => {
             component="img"
             sx={{
               marginTop: '50px',
-              width: { xs: 200, sm: 200, md: 300 },
-              height: { xs: 200, sm: 200, md: 300 }
+              width: { xs: 200, sm: 200, md: 300 }
+              // height: { xs: 200, sm: 200, md: 300 }
             }}
             src={currentImg}
           />
@@ -270,7 +247,14 @@ const ProductDetail = () => {
           </Box>
         </Stack>
       </Paper>
-      <Ads />
+      <Box
+        sx={{
+          width: '300px',
+          display: { xs: 'none', sm: 'none', md: 'block' }
+        }}
+      >
+        <Ads />
+      </Box>
     </Box>
   );
 };

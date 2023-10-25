@@ -65,7 +65,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           >
             {productList.list1.map((item, index) => (
               <div key={index}>
-                <AmazonProduct item={item} />
+                {item.title === '' ? <></> : <AmazonProduct item={item} />}
               </div>
             ))}
           </Box>
@@ -116,7 +116,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           >
             {productList.list2.map((item, index) => (
               <div key={index}>
-                <AmazonProduct item={item} />
+                {item.title === '' ? <></> : <AmazonProduct item={item} />}
               </div>
             ))}
           </Box>
