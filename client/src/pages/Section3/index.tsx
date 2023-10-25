@@ -16,6 +16,7 @@ const ReusableWalmartProducts = ({
         sx={{
           display: 'flex',
           flexDirection: 'column',
+          // justifyContent: 'start',
           alignItem: { xs: 'center', sm: 'center' },
           marginLeft: { xs: '0', sm: '20px' }
         }}
@@ -49,11 +50,13 @@ const ReusableWalmartProducts = ({
 
         <Box
           sx={{
+            width: '100%',
             display: 'flex',
-            flexDirection: { xs: 'column', sm: 'column', md: 'row' },
-            flexWrap: { xs: 'nowrap', sm: 'nowrap', md: 'wrap' },
-            alignItems: { xs: 'start', md: 'center' },
-            justifyContent: { xs: 'start', sm: 'start' },
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: { xs: 'center', sm: 'start' },
+            height: '310px',
             margin: { xs: '0 0 0 0', md: '10px 0 0 40px' },
             gap: '20px'
           }}

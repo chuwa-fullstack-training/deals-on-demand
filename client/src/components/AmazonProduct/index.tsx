@@ -32,11 +32,7 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
           <Box
             component="img"
             sx={{ height: { xs: 50, md: 150 } }}
-            src={
-              item.image1.startsWith('../')
-                ? 'https://avatars.githubusercontent.com/u/583231?v=4'
-                : item.image1
-            }
+            src={item.image1}
             alt=""
           />
         </Box>

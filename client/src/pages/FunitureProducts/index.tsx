@@ -6,32 +6,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { scrollTo } from '@/utils';
-
-// type walmartType = {
-//   wpId: number;
-//   Id: string;
-//   CatalogId: string;
-//   CampaignId: string;
-//   CampaignName: string;
-//   CatalogItemId: string;
-//   Name: string;
-//   Description: string;
-//   Manufacturer: string;
-//   Url: string;
-//   ImageUrl: string;
-//   Currency: string;
-//   StockAvailability: string;
-//   Gtin: string;
-//   Category: string;
-//   SubCategory: string;
-//   IsParent: string;
-//   Text2: string;
-//   Uri: string;
-//   CurrentPrice: string;
-//   OriginalPrice: string;
-//   DiscountPercentage: string;
-// };
-
 const FurnitureProducts = ({ productList }: { productList: WalmartType[] }) => {
   const scrollRef1 = useRef<HTMLElement | null>(null);
 
