@@ -41,7 +41,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
             onClick={() =>
-              scrollTo(scrollRef1, mediumSizeMatches ? -300 : -150)
+              scrollTo(scrollRef1, mediumSizeMatches ? -600 : -300)
             }
           >
             <ArrowBackIosIcon />
@@ -65,13 +65,13 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           >
             {productList.list1.map((item, index) => (
               <div key={index}>
-                <AmazonProduct item={item} />
+                {item.title === '' ? <></> : <AmazonProduct item={item} />}
               </div>
             ))}
           </Box>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            onClick={() => scrollTo(scrollRef1, mediumSizeMatches ? 300 : 150)}
+            onClick={() => scrollTo(scrollRef1, mediumSizeMatches ? 600 : 300)}
           >
             <ArrowForwardIosIcon />
           </Button>
@@ -93,7 +93,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
             onClick={() =>
-              scrollTo(scrollRef2, mediumSizeMatches ? -300 : -150)
+              scrollTo(scrollRef2, mediumSizeMatches ? -600 : -300)
             }
           >
             <ArrowBackIosIcon />
@@ -107,7 +107,6 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               alignItems: 'center',
               justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
-
               height: { md: 310, sm: 200, xs: 300 },
               margin: '10px 0',
               overflow: { sm: 'hidden' },
@@ -117,13 +116,13 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
           >
             {productList.list2.map((item, index) => (
               <div key={index}>
-                <AmazonProduct item={item} />
+                {item.title === '' ? <></> : <AmazonProduct item={item} />}
               </div>
             ))}
           </Box>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
-            onClick={() => scrollTo(scrollRef2, mediumSizeMatches ? 300 : 150)}
+            onClick={() => scrollTo(scrollRef2, mediumSizeMatches ? 600 : 300)}
           >
             <ArrowForwardIosIcon />
           </Button>

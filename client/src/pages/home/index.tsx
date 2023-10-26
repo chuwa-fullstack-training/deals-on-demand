@@ -2,6 +2,7 @@ import { Box, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
 import BestProducts from '@/pages/BestProducts';
 import FurnitureProducts from '@/pages/FunitureProducts';
+
 import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
@@ -11,6 +12,11 @@ import {
   useGetWalmartDataByCatalogQuery
 } from '@/services/Walmart';
 import { RootState } from '@/app/store';
+// import { useEffect } from 'react';
+// import {
+//   loadExclusiveDeals,
+//   loadFurnitureProducts
+// } from '@/app/reducers/walmartSlice.ts';
 
 const Home = () => {
   const cIId = '9767';
@@ -25,6 +31,12 @@ const Home = () => {
   const bestProductList = useSelector(
     (state: RootState) => state.amazonReducer
   );
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log(data, dataByCatalog);
+  //   dispatch(loadFurnitureProducts({ furnitureProducts: data }));
+  //   dispatch(loadExclusiveDeals({ exclusiveDeals: dataByCatalog }));
+  // }, []);
 
   if (isLoading || isLoading2) return <Loading />;
   if (error || error2) return <div>Something went wrong</div>;

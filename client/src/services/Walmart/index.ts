@@ -50,9 +50,15 @@ export const walmartApi = createApi({
     }),
     getWalmartDataByCatalog: builder.query({
       query: (cIId: string) => `walmart/getDiscountsByCatalog/${cIId}`
+    }),
+    getProductsBySearch: builder.query({
+      query: (searchValue: string) => `walmart/search/${searchValue}`
     })
   })
 });
 
-export const { useGetWalmartDataQuery, useGetWalmartDataByCatalogQuery } =
-  walmartApi;
+export const {
+  useGetWalmartDataQuery,
+  useGetWalmartDataByCatalogQuery,
+  useGetProductsBySearchQuery
+} = walmartApi;

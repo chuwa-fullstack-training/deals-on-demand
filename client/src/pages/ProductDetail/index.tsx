@@ -15,69 +15,59 @@ import {
 } from '@mui/material';
 import { RootState } from '@/app/store.ts';
 
+import { isAmazon, isWalmart } from '@/utils/checkProductType.ts';
+import { ProductType } from '@/types/product';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 import { AmazonProduct as AmazonType } from '@/types/amazon';
+import {
+  useGetWalmartDataByCatalogQuery,
+  useGetWalmartDataQuery
+} from '@/services/Walmart';
+import Loading from '@/components/Loading';
 
-type ProductType = AmazonType | WalmartType | undefined;
-
-// {
-//   title: '0',
-//       id: '0',
-//     desc: '0',
-//     originalPrice: '0',
-//     currentPrice: '0',
-//     image1: '0',
-//     image2: '0',
-//     image3: '0',
-//     image4: '0',
-//     image5: '0',
-//     image6: '0',
-//     clickURL: '0'
-// }
-
-// {
-//     "wpId": 15321,
-//     "Id": "product_9767_774976869",
-//     "CatalogId": "9767",
-//     "CampaignId": "9383",
-//     "CampaignName": "Walmart Affiliate Program",
-//     "CatalogItemId": "774976869",
-//     "Name": "Mellow MAVN Upholstered Platform Bed  Modern Tufted Headboard  Real Wooden Slats and Legs  Dark Grey  King",
-//     "Description": "Mellow s Mavn upholstered platform bed features a modern tufted design and headboard with elegant curves and modern edges. The dark grey fabric headboard is detailed with curves complemented with clean  edged corners and layered with foam for comfort as you lean back and relax. The authentic solid wooden slats provide sturdy  durable support without the need for a separate box spring. The legs are also made with solid wood for stability and a refined modern look. Enjoy quick and easy assembly with a free ratchet and everything you need included in the package  no other tools required. The Mavn platform bed is available in Full  Queen and King sizes and comes with a 5-year manufacturer s warranty.",
-//     "Manufacturer": "Mellow",
-//     "Url": "https://goto.walmart.com/c/3917115/1285386/9383?prodsku=774976869&u=https%3A%2F%2Fwww.walmart.com%2Fip%2FMellow-MAVN-Upholstered-Platform-Bed-Modern-Tufted-Headboard-Real-Wooden-Slats-and-Legs-Dark-Grey-King%2F774976869&intsrc=APIG_9767",
-//     "ImageUrl": "https://i5.walmartimages.com/asr/102b75c2-3163-4499-b9fe-3085b9bb63a2_1.d0cdb4c43f5ac838b6f190f865398bd7.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff",
-//     "Currency": "USD",
-//     "StockAvailability": "InStock",
-//     "Gtin": "00842165126559",
-//     "Category": "Home>Furniture>Bedroom Furniture>Beds>Shop all Beds",
-//     "SubCategory": "Home Page/Home/Furniture/Bedroom Furniture/Beds/Shop all Beds",
-//     "IsParent": "false",
-//     "Text2": "Walmart.com",
-//     "Uri": "/Mediapartners/IRA4K3ySvbUh3917115tdrHHtKz6Y6tff1/Catalogs/9767/Items/product_9767_774976869",
-//     "CurrentPrice": "321.12",
-//     "OriginalPrice": "350.00",
-//     "DiscountPercentage": "8"
-// },
 const ProductDetail = () => {
   const location = useLocation();
   const platform = location.pathname.split('/').slice(-2)[0];
   const productId = location.pathname.split('/').slice(-1)[0];
   const amazonState = useSelector((state: RootState) => state.amazonReducer);
-  const walmartState = useSelector((state: RootState) => state.walmartReducer);
+  // const walmartState = useSelector((state: RootState) => state.walmartReducer);
 
-  const product: ProductType | null = useMemo(() => {
+  const cIId = '9767';
+
+  const { data, error, isLoading } = useGetWalmartDataQuery(null);
+  const {
+    data: dataByCatalog,
+    error: error2,
+    isLoading: isLoading2
+  } = useGetWalmartDataByCatalogQuery(cIId);
+  const searchedProducts = useSelector(
+    (state: RootState) => state.walmartReducer.searchedProducts
+  );
+  const walmartState = useMemo(() => {
+    return {
+      furnitureProducts: data,
+      exclusiveDeals: dataByCatalog,
+      searchProducts: searchedProducts
+    };
+  }, [data, dataByCatalog, searchedProducts]);
+
+  const product: ProductType = useMemo(() => {
     if (platform === 'amazon') {
       for (const values of Object.values(amazonState)) {
-        const element = values.find(item => item.id === productId);
+        const element = values.find(
+          (item: AmazonType) => item.id === productId
+        );
         if (element !== undefined) return element;
       }
       return null;
     } else if (platform === 'walmart') {
-      // for (const values1 of Object.values(walmartState)) {
-      //   const element1 = values1.find(item => item.Id === productId);
-      //   if (element1 !== undefined) return element1;
-      // }
+      for (const values of Object.values(walmartState)) {
+        if (values === undefined) break;
+        const element = values.find(
+          (item: WalmartType) => item.Id === productId
+        );
+        if (element !== undefined) return element;
+      }
       return null;
     } else {
       return null;
@@ -85,10 +75,50 @@ const ProductDetail = () => {
   }, [amazonState, walmartState, productId, platform]);
 
   useEffect(() => {
-    console.log(product);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [product]);
 
-  const [currentImg, setCurrentImg] = useState(product?.image1);
+  // product null handle navigate to error page
+  const [currentImg, setCurrentImg] = useState(() => {
+    if (isAmazon(product)) {
+      return product.image1;
+    } else if (isWalmart(product)) {
+      return product.ImageUrl;
+    } else {
+      return '';
+    }
+  });
+
+  const productImageList = useMemo(() => {
+    if (isAmazon(product)) {
+      const newImageList = [];
+      if (product.image1 !== '') newImageList.push(product.image1);
+      if (product.image2 !== '') newImageList.push(product.image2);
+      if (product.image3 !== '') newImageList.push(product.image3);
+      if (product.image4 !== '') newImageList.push(product.image4);
+      if (product.image5 !== '') newImageList.push(product.image5);
+      if (product.image6 !== '') newImageList.push(product.image6);
+
+      return newImageList;
+    } else if (isWalmart(product)) {
+      return [product?.ImageUrl];
+    } else {
+      return [];
+    }
+  }, [product]);
+
+  const toOriginalWebsite = () => {
+    if (isAmazon(product)) {
+      return product.clickURL;
+    } else if (isWalmart(product)) {
+      return product.Url;
+    } else {
+      return '';
+    }
+  };
+
+  if (isLoading || isLoading2) return <Loading />;
+  if (error || error2) return <div>Something went wrong</div>;
 
   return (
     <Box
@@ -100,13 +130,16 @@ const ProductDetail = () => {
       }}
     >
       <Paper
-        elevation={3}
         sx={{
           width: { xs: '100%', md: 800, lg: 900 },
           height: '100%',
           padding: { xs: '20px 10px', md: '30px' },
           marginTop: '3%',
-          marginLeft: '5%'
+          marginLeft: { md: '5%' },
+          boxShadow: {
+            xs: 'none',
+            md: '0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)'
+          }
         }}
       >
         <Stack
@@ -115,7 +148,7 @@ const ProductDetail = () => {
             width: { xs: '100%' },
             height: '100%',
             display: 'flex',
-            gap: '20px',
+            gap: '30px',
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: { xs: 'center', md: 'start' }
           }}
@@ -127,14 +160,7 @@ const ProductDetail = () => {
             }}
           >
             <ImageList cols={1} gap={40} sx={{ height: '100%' }}>
-              {[
-                product?.image1,
-                product?.image2,
-                product?.image3,
-                product?.image4,
-                product?.image5,
-                product?.image6
-              ].map((item, index) => (
+              {productImageList.map((item, index) => (
                 <ImageListItem key={index}>
                   <img
                     src={item}
@@ -157,8 +183,8 @@ const ProductDetail = () => {
             component="img"
             sx={{
               marginTop: '50px',
-              width: { xs: 200, sm: 200, md: 300 },
-              height: { xs: 200, sm: 200, md: 300 }
+              width: { xs: 200, sm: 200, md: 300 }
+              // height: { xs: 200, sm: 200, md: 300 }
             }}
             src={currentImg}
           />
@@ -172,12 +198,22 @@ const ProductDetail = () => {
             }}
           >
             <Typography variant={'h6'} sx={{ fontWeight: 600 }}>
-              {product?.title}
+              {isAmazon(product)
+                ? product?.title
+                : isWalmart(product)
+                ? product?.Name
+                : ''}
             </Typography>
             <Typography variant={'subtitle2'}>Amazon</Typography>
             <Divider />
             <Typography variant={'h6'} sx={{ fontWeight: 600 }}>
-              ${product?.currentPrice} USD
+              $
+              {isAmazon(product)
+                ? product?.currentPrice
+                : isWalmart(product)
+                ? product?.CurrentPrice
+                : ''}
+              {' USD'}
             </Typography>
             <Divider />
             <Typography variant={'subtitle2'} sx={{ fontWeight: 600 }}>
@@ -191,13 +227,17 @@ const ProductDetail = () => {
               }}
             >
               <Typography variant={'subtitle2'} sx={{ lineHeight: '2em' }}>
-                {product?.desc}
+                {isAmazon(product)
+                  ? product?.desc
+                  : isWalmart(product)
+                  ? product?.Description
+                  : ''}
               </Typography>
             </Box>
 
             <Button
               LinkComponent={Link}
-              href={product?.clickURL || ''}
+              href={toOriginalWebsite()}
               target="_blank"
               variant="contained"
               sx={{ marginTop: '20px' }}
@@ -207,7 +247,14 @@ const ProductDetail = () => {
           </Box>
         </Stack>
       </Paper>
-      <Ads />
+      <Box
+        sx={{
+          width: '300px',
+          display: { xs: 'none', sm: 'none', md: 'block' }
+        }}
+      >
+        <Ads />
+      </Box>
     </Box>
   );
 };
