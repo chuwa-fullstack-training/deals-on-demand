@@ -23,6 +23,7 @@ import logoSrc from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getProductsBySearch } from '@/services/Walmart';
 
+
 import { useClickOutside } from '@/utils/hooks';
 
 type SearchResult = {
