@@ -27,6 +27,7 @@ import { useClickOutside } from '@/utils/hooks';
 
 type SearchResult = {
   Name: string;
+  Id: string;
 };
 
 export const Header: React.FC = () => {
@@ -77,7 +78,10 @@ export const Header: React.FC = () => {
     }
   };
 
-  const handleClickSearchItem = () => {};
+  const handleClickSearchItem = (productId: string) => {
+    // navigate(`/product/walmart/${productId}`);
+    navigate('/product/amazon/' + productId);
+  };
 
   return (
     <>
@@ -161,7 +165,7 @@ export const Header: React.FC = () => {
                   {searchResults.map((result, index) => (
                     <Box
                       key={index}
-                      onClick={handleClickSearchItem}
+                      onClick={() => handleClickSearchItem(result.Id)}
                       sx={{
                         padding: '8px 16px',
                         borderBottom: '1px solid #e1e1e1',
