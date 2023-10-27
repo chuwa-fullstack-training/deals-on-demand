@@ -22,8 +22,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import logoSrc from '../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { getProductsBySearch } from '@/services/Walmart';
-
-
 import { useClickOutside } from '@/utils/hooks';
 
 type SearchResult = {
@@ -82,6 +80,14 @@ export const Header: React.FC = () => {
   const handleClickSearchItem = (productId: string) => {
     // navigate(`/product/walmart/${productId}`);
     navigate('/product/amazon/' + productId);
+  };
+
+  const handleClickFurnitures = () => {
+    navigate('/furnitures');
+  };
+
+  const handleClickElectronics = () => {
+    navigate('/electronics');
   };
 
   return (
@@ -223,7 +229,7 @@ export const Header: React.FC = () => {
           <Box sx={{ backgroundColor: 'white', height: '2px' }} />
           <Toolbar
             sx={{
-              width: { xs: '90%', sm: '60%' },
+              width: { xs: '90%', sm: '36%' },
               justifyContent: 'space-between',
               gap: 1
             }}
@@ -240,26 +246,16 @@ export const Header: React.FC = () => {
             <Button
               color="inherit"
               sx={{ textTransform: 'none', padding: '0' }}
+              onClick={handleClickElectronics}
             >
               Electronics
             </Button>
             <Button
               color="inherit"
               sx={{ textTransform: 'none', padding: '0' }}
+              onClick={handleClickFurnitures}
             >
-              Travel & Vacation
-            </Button>
-            <Button
-              color="inherit"
-              sx={{ textTransform: 'none', padding: '0' }}
-            >
-              Automobile
-            </Button>
-            <Button
-              color="inherit"
-              sx={{ textTransform: 'none', padding: '0' }}
-            >
-              More
+              Furnitures
             </Button>
           </Toolbar>
         </AppBar>

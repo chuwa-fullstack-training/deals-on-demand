@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import { store } from '@/app/store.ts';
 import SearchedProducts from '@/pages/SearchedProducts';
 import ProductDetail from '@/pages/ProductDetail';
+import ElectronicsPage from './pages/ElectronicsPage';
+import FurnituresPage from './pages/FurnituresPage';
 
 // Usage :
 // <Button sx={{ color: "primary.main" }}></Button>
@@ -35,6 +37,8 @@ function App() {
               <Route path="/">
                 <Route index element={<Home />} />
                 <Route path="home" element={<Home />} />
+                <Route path="electronics" element={<ElectronicsPage />} />
+                <Route path="furnitures" element={<FurnituresPage />} />
                 <Route
                   path="product/:platform/:productId"
                   element={<ProductDetail />}
