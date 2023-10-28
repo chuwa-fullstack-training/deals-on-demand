@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
+// import { AmazonProduct as AmazonType } from '@/types/amazon';
 
 const ReusableWalmartProducts = ({
   productList,
@@ -33,7 +34,7 @@ const ReusableWalmartProducts = ({
           >
             {productList.length} Search results
           </Typography>
-        ) : (
+        ) : from === 'home' ? (
           <Typography
             variant="h6"
             fontWeight={600}
@@ -44,6 +45,18 @@ const ReusableWalmartProducts = ({
             }}
           >
             Exclusive Deals
+          </Typography>
+        ) : (
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              marginBottom: '10px',
+              display: 'flex',
+              justifyContent: { xs: 'center', sm: 'start' }
+            }}
+          >
+            Exclusive Deals On Funitures
           </Typography>
         )}
 
@@ -60,7 +73,12 @@ const ReusableWalmartProducts = ({
         >
           {productList.map((item, index) => (
             <div key={index}>
-              <WalmartProduct item={item} />
+              {from === 'headerelectronics' ? (
+                // <AmazonProduct item={item}/>
+                <></>
+              ) : (
+                <WalmartProduct item={item} />
+              )}
             </div>
           ))}
         </Box>
