@@ -79,7 +79,9 @@ export const Header: React.FC = () => {
 
   const handleClickSearchItem = (productId: string) => {
     // navigate(`/product/walmart/${productId}`);
-    navigate('/product/amazon/' + productId);
+    navigate('/product/walmart/' + productId, {
+      state: { searchText: searchValue }
+    });
   };
 
   const handleClickFurnitures = () => {

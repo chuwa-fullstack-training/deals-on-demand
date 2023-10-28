@@ -1,11 +1,15 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { WalmartProduct as ItemType } from '@/types/walmart';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const WalmartProduct = ({ item }: { item: ItemType }) => {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const searchText = params.get('item');
   const toDetails = () => {
-    navigate('/product/walmart/' + item.Id);
+    navigate('/product/walmart/' + item.Id, {
+      state: { searchText: searchText }
+    });
   };
   return (
     <Box
