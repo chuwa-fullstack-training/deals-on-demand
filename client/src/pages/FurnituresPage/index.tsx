@@ -3,21 +3,22 @@ import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
 import {
-  useGetWalmartDataQuery,
+  // useGetWalmartDataQuery,
   useGetWalmartDataByCatalogQuery
 } from '@/services/Walmart';
 
 export default function FurnituresPage() {
   const cIId = '9767';
 
-  const { data, isLoading } = useGetWalmartDataQuery(null);
+  // const { data, isLoading } = useGetWalmartDataQuery(null);
   const {
     data: dataByCatalog,
     error: error2,
     isLoading: isLoading2
   } = useGetWalmartDataByCatalogQuery(cIId);
 
-  if (isLoading || isLoading2) return <Loading />;
+  if (error2) return <div>Something went wrong</div>;
+  if (isLoading2) return <Loading />;
 
   return (
     <>
@@ -31,7 +32,10 @@ export default function FurnituresPage() {
             spacing={3}
           >
             <Stack direction="column">
-              <ReusableWalmartProducts productList={dataByCatalog} from="headerfurnitures" />
+              <ReusableWalmartProducts
+                productList={dataByCatalog}
+                from="headerfurnitures"
+              />
             </Stack>
           </Stack>
           <Ads />
