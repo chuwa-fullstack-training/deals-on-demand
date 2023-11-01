@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import BestProducts from '@/pages/BestProducts';
 import FurnitureProducts from '@/pages/FunitureProducts';
 
-import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
+import ReusableWalmartProducts from '@/pages/ReusableProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
 

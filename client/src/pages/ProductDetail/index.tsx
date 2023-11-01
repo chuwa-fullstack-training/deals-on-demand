@@ -14,12 +14,12 @@ import {
   Typography
 } from '@mui/material';
 import { RootState } from '@/app/store.ts';
-
 import { isAmazon, isWalmart } from '@/utils/checkProductType.ts';
 import { ProductType } from '@/types/product';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
 import { AmazonProduct as AmazonType } from '@/types/amazon';
 import {
+  useGetProductsBySearchQuery,
   useGetWalmartDataByCatalogQuery,
   useGetWalmartDataQuery
 } from '@/services/Walmart';
@@ -29,28 +29,37 @@ const ProductDetail = () => {
   const location = useLocation();
   const platform = location.pathname.split('/').slice(-2)[0];
   const productId = location.pathname.split('/').slice(-1)[0];
+  const searchValue = location.state?.searchText || '';
+  console.log(searchValue);
+  const skipSearchEmpty = searchValue === '';
+
   const amazonState = useSelector((state: RootState) => state.amazonReducer);
   // const walmartState = useSelector((state: RootState) => state.walmartReducer);
 
   const cIId = '9767';
 
-  const { data, error, isLoading } = useGetWalmartDataQuery(null);
+  const { data: discountData, error, isLoading } = useGetWalmartDataQuery(null);
   const {
-    data: dataByCatalog,
+    data: furnitureData,
     error: error2,
     isLoading: isLoading2
   } = useGetWalmartDataByCatalogQuery(cIId);
-  const searchedProducts = useSelector(
-    (state: RootState) => state.walmartReducer.searchedProducts
-  );
+  const {
+    data: searchedProducts,
+    error: error3,
+    isLoading: isLoading3
+  } = useGetProductsBySearchQuery(searchValue, { skip: skipSearchEmpty });
+
+  // Union Walmart products
   const walmartState = useMemo(() => {
     return {
-      furnitureProducts: data,
-      exclusiveDeals: dataByCatalog,
+      furnitureProducts: discountData,
+      exclusiveDeals: furnitureData,
       searchProducts: searchedProducts
     };
-  }, [data, dataByCatalog, searchedProducts]);
+  }, [discountData, furnitureData, searchedProducts]);
 
+  // Get product item
   const product: ProductType = useMemo(() => {
     if (platform === 'amazon') {
       for (const values of Object.values(amazonState)) {
@@ -69,25 +78,28 @@ const ProductDetail = () => {
         if (element !== undefined) return element;
       }
       return null;
-    } else {
-      return null;
     }
+    return null;
   }, [amazonState, walmartState, productId, platform]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (product === null) {
+      setCurrentImg('');
+    } else if (isAmazon(product)) {
+      setCurrentImg(product.image1);
+    } else if (isWalmart(product)) {
+      setCurrentImg(product.ImageUrl);
+    } else {
+      setCurrentImg('');
+    }
   }, [product]);
 
   // product null handle navigate to error page
-  const [currentImg, setCurrentImg] = useState(() => {
-    if (isAmazon(product)) {
-      return product.image1;
-    } else if (isWalmart(product)) {
-      return product.ImageUrl;
-    } else {
-      return '';
-    }
-  });
+  const [currentImg, setCurrentImg] = useState('');
 
   const productImageList = useMemo(() => {
     if (isAmazon(product)) {
@@ -117,8 +129,8 @@ const ProductDetail = () => {
     }
   };
 
-  if (isLoading || isLoading2) return <Loading />;
-  if (error || error2) return <div>Something went wrong</div>;
+  if (isLoading || isLoading2 || isLoading3) return <Loading />;
+  if (error || error2 || error3) return <div>Something went wrong</div>;
 
   return (
     <Box
@@ -167,7 +179,8 @@ const ProductDetail = () => {
                     alt=""
                     loading="lazy"
                     onMouseEnter={() => {
-                      if (item !== undefined) setCurrentImg(item);
+                      // if (item !== undefined)
+                      setCurrentImg(item);
                     }}
                     style={{
                       width: '90px',
@@ -227,10 +240,12 @@ const ProductDetail = () => {
               }}
             >
               <Typography variant={'subtitle2'} sx={{ lineHeight: '2em' }}>
-                {isAmazon(product)
-                  ? product?.desc
-                  : isWalmart(product)
-                  ? product?.Description
+                {product
+                  ? isAmazon(product)
+                    ? product?.desc
+                    : isWalmart(product)
+                    ? product?.Description
+                    : ''
                   : ''}
               </Typography>
             </Box>

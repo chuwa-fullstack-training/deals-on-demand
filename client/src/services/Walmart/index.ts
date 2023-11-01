@@ -44,6 +44,7 @@ export const walmartApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.BASE_URL || 'http://localhost:5001'
   }),
+  keepUnusedDataFor: 30,
   endpoints: builder => ({
     getWalmartData: builder.query({
       query: () => 'walmart/getDiscounts/'

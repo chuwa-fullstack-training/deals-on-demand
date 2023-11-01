@@ -1,35 +1,42 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getProductsBySearch } from '@/services/Walmart';
-import { useDispatch, useSelector } from 'react-redux';
-import { searchProducts } from '@/app/reducers/walmartSlice';
-import { RootState } from '@/app/store.ts';
-import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
-import { WalmartProduct } from '@/types/walmart';
+import {
+  // getProductsBySearch,
+  useGetProductsBySearchQuery
+} from '@/services/Walmart';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { searchProducts } from '@/app/reducers/walmartSlice';
+// import { RootState } from '@/app/store.ts';
+import ReusableProducts from '@/pages/ReusableProducts';
+// import { WalmartProduct } from '@/types/walmart';
 import Ads from '@/components/Ads';
 import { Box, Stack } from '@mui/material';
-
-// interface Product {
-//   Id: string;
-//   Name: string;
-// }
+import Loading from '@/components/Loading';
 
 const SearchedProducts: React.FC = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const params = new URLSearchParams(location.search);
   const query = params.get('item') || '';
-  const searchedProducts = useSelector(
-    (state: RootState) => state.walmartReducer.searchedProducts
-  ) as WalmartProduct[];
-  console.log(searchedProducts);
-
-  useEffect(() => {
-    (async () => {
-      const searchedProducts = await getProductsBySearch(query);
-      dispatch(searchProducts({ searchedProducts: searchedProducts }));
-    })();
-  }, [query]);
+  const skipSearchEmpty = query === '';
+  // const searchedProducts = useSelector(
+  //   (state: RootState) => state.walmartReducer.searchedProducts
+  // ) as WalmartProduct[];
+  // console.log(searchedProducts);
+  //
+  // useEffect(() => {
+  //   (async () => {
+  //     const searchedProducts = await getProductsBySearch(query);
+  //     dispatch(searchProducts({ searchedProducts: searchedProducts }));
+  //   })();
+  // }, [query]);
+  const {
+    data: searchedProducts,
+    error: error3,
+    isLoading: isLoading3
+  } = useGetProductsBySearchQuery(query, { skip: skipSearchEmpty });
+  if (isLoading3) return <Loading />;
+  if (error3) return <div>Something went wrong</div>;
 
   return (
     <>
@@ -44,7 +51,7 @@ const SearchedProducts: React.FC = () => {
               spacing={3}
             >
               <Stack direction="column">
-                <ReusableWalmartProducts
+                <ReusableProducts
                   productList={searchedProducts}
                   from="search"
                 />

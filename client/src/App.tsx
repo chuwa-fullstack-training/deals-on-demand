@@ -4,11 +4,12 @@ import Home from './pages/home';
 import Header from './components/Header';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
-import { store } from '@/app/store.ts';
+import { store, persistor } from './app/store';
 import SearchedProducts from '@/pages/SearchedProducts';
 import ProductDetail from '@/pages/ProductDetail';
 import ElectronicsPage from './pages/ElectronicsPage';
 import FurnituresPage from './pages/FurnituresPage';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Usage :
 // <Button sx={{ color: "primary.main" }}></Button>
@@ -30,25 +31,27 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <Header />
-            <Routes>
-              <Route path="/">
-                <Route index element={<Home />} />
-                <Route path="home" element={<Home />} />
-                <Route path="electronics" element={<ElectronicsPage />} />
-                <Route path="furnitures" element={<FurnituresPage />} />
-                <Route
-                  path="product/:platform/:productId"
-                  element={<ProductDetail />}
-                />
-                <Route path="search" element={<SearchedProducts />} />
-              </Route>
-            </Routes>
-            {/*footer*/}
-          </Router>
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <Router>
+              <Header />
+              <Routes>
+                <Route path="/">
+                  <Route index element={<Home />} />
+                  <Route path="home" element={<Home />} />
+                  <Route path="electronics" element={<ElectronicsPage />} />
+                  <Route path="furnitures" element={<FurnituresPage />} />
+                  <Route
+                    path="product/:platform/:productId"
+                    element={<ProductDetail />}
+                  />
+                  <Route path="search" element={<SearchedProducts />} />
+                </Route>
+              </Routes>
+              {/*footer*/}
+            </Router>
+          </ThemeProvider>
+        </PersistGate>
       </Provider>
     </>
   );
