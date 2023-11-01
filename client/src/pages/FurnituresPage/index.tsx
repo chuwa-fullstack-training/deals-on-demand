@@ -1,16 +1,19 @@
 import { Box, Stack } from '@mui/material';
-import ReusableProducts from '@/pages/ReusableProducts';
+
+// import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
 import {
   // useGetWalmartDataQuery,
   useGetWalmartDataByCatalogQuery
 } from '@/services/Walmart';
+import ReusableProducts from '@/pages/ReusableProducts';
 
 export default function FurnituresPage() {
   const cIId = '9767';
 
   // const { data, isLoading } = useGetWalmartDataQuery(null);
+
   const {
     data: dataByCatalog,
     error: error2,

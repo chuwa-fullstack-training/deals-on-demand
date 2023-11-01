@@ -274,8 +274,7 @@ export const Header: React.FC = () => {
             }
           }}
         >
-          <List
-          >
+          <List>
             <ListItem component={ButtonBase} onClick={handleDealClick}>
               <ListItemIcon>
                 <NotificationsNoneIcon />
