@@ -87,7 +87,7 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
         >
           <Stack
             direction="row"
-            sx={{ gap: '5px', margin: { sm: '5px 0', md: '0 0' } }}
+            sx={{ gap: '5px', margin: { xs: '5px 0', sm: '5px 0', md: '0 0' } }}
           >
             {item.originalPrice !== item.currentPrice ? (
               <Typography
