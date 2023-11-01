@@ -7,7 +7,7 @@ import {
 // import { useDispatch, useSelector } from 'react-redux';
 // import { searchProducts } from '@/app/reducers/walmartSlice';
 // import { RootState } from '@/app/store.ts';
-import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
+import ReusableProducts from '@/pages/ReusableProducts';
 // import { WalmartProduct } from '@/types/walmart';
 import Ads from '@/components/Ads';
 import { Box, Stack } from '@mui/material';
@@ -51,7 +51,7 @@ const SearchedProducts: React.FC = () => {
               spacing={3}
             >
               <Stack direction="column">
-                <ReusableWalmartProducts
+                <ReusableProducts
                   productList={searchedProducts}
                   from="search"
                 />

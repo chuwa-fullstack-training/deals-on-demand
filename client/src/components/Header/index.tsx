@@ -82,6 +82,7 @@ export const Header: React.FC = () => {
     navigate('/product/walmart/' + productId, {
       state: { searchText: searchValue }
     });
+    setSearchValue('');
   };
 
   const handleClickFurnitures = () => {
@@ -274,12 +275,6 @@ export const Header: React.FC = () => {
           }}
         >
           <List
-          // sx={{
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   justifyContent: 'center',
-          //   height: '100%'
-          // }}
           >
             <ListItem component={ButtonBase} onClick={handleDealClick}>
               <ListItemIcon>

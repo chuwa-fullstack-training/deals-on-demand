@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material';
-import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
+import ReusableProducts from '@/pages/ReusableProducts';
 import Ads from '@/components/Ads';
 import Loading from '@/components/Loading';
 import {
@@ -32,7 +32,7 @@ export default function FurnituresPage() {
             spacing={3}
           >
             <Stack direction="column">
-              <ReusableWalmartProducts
+              <ReusableProducts
                 productList={dataByCatalog}
                 from="headerfurnitures"
               />

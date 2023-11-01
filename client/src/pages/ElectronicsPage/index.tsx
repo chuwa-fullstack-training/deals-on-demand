@@ -1,13 +1,13 @@
 import { Box, Stack } from '@mui/material';
 import Ads from '@/components/Ads';
-// import ReusableWalmartProducts from '@/pages/ReusableWalmartProducts';
-// import { RootState } from '@/app/store';
-// import { useSelector } from 'react-redux';
+import ReusableProducts from '@/pages/ReusableProducts';
+import { RootState } from '@/app/store';
+import { useSelector } from 'react-redux';
 
 export default function ElectronicsPage() {
-  // const bestProductList = useSelector(
-  //     (state: RootState) => state.amazonReducer
-  //   );
+  const bestProductList = useSelector(
+    (state: RootState) => state.amazonReducer
+  );
 
   return (
     <>
@@ -21,12 +21,10 @@ export default function ElectronicsPage() {
             spacing={3}
           >
             <Stack direction="column">
-              {/*
-                  <ReusableWalmartProducts
-                productList={dataByCatalog}
+              <ReusableProducts
+                productList={bestProductList.list1}
                 from="headerelectronics"
               />
-              */}
             </Stack>
           </Stack>
           <Ads />

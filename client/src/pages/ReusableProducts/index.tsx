@@ -1,14 +1,15 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import WalmartProduct from '@/components/WalmartProduct';
+import AmazonProduct from '@/components/AmazonProduct';
 import { WalmartProduct as WalmartType } from '@/types/walmart';
-// import { AmazonProduct as AmazonType } from '@/types/amazon';
+import { AmazonProduct as AmazonType } from '@/types/amazon';
 
-const ReusableWalmartProducts = ({
+const ReusableProducts = ({
   productList,
   from
 }: {
-  productList: WalmartType[];
+  productList: WalmartType[] | AmazonType[];
   from: string;
 }) => {
   return (
@@ -74,8 +75,8 @@ const ReusableWalmartProducts = ({
           {productList.map((item, index) => (
             <div key={index}>
               {from === 'headerelectronics' ? (
-                // <AmazonProduct item={item}/>
-                <></>
+                <AmazonProduct item={item}/>
+                // <></>
               ) : (
                 <WalmartProduct item={item} />
               )}
@@ -86,4 +87,4 @@ const ReusableWalmartProducts = ({
     </React.Fragment>
   );
 };
-export default ReusableWalmartProducts;
+export default ReusableProducts;
