@@ -1,11 +1,14 @@
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography, useTheme } from '@mui/material';
 import { WalmartProduct as ItemType } from '@/types/walmart';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const WalmartProduct = ({ item }: { item: ItemType }) => {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const searchText = params.get('item');
+  const { breakpoints } = useTheme();
+  const mediumSizeMatches = useMediaQuery(breakpoints.up('md'));
   const toDetails = () => {
     navigate('/product/walmart/' + item.Id, {
       state: { searchText: searchText }
@@ -110,9 +113,17 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
                 </Typography>
               )}
             </Box>
-            {/*onClick={()=>toProductDetail()}*/}
-            <Button sx={{ fontSize: '10px' }} onClick={() => toDetails()}>
-              View Deals
+            <Button
+              variant="contained"
+              onClick={toDetails}
+              sx={{
+                // backgroundColor: 'primary.main',
+                fontSize: { xs: '8px', sm: '10px', md: '10px' },
+                width: { xs: '10px', sm: '10px', md: '100px' },
+                height: { xs: '20px', sm: '20px', md: '25px' }
+              }}
+            >
+              {mediumSizeMatches ? 'View Deals' : 'View'}
             </Button>
           </Box>
         </Box>
