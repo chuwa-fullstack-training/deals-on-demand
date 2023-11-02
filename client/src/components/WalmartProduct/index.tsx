@@ -89,7 +89,7 @@ const WalmartProduct = ({ item }: { item: ItemType }) => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginTop: '5px'
+              marginTop: '10px'
             }}
           >
             <Box sx={{ display: 'flex', gap: '5px' }}>
