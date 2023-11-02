@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
     }, 300);
 
     return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
-  }, [searchValue]);
+  }, [isSearching, searchValue]);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(prev => !prev);
