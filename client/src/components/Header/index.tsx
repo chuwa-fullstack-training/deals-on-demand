@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
     }, 300);
 
     return () => clearTimeout(timer); // This clears the timer if the value changes before the delay finishes
-  }, [searchValue]);
+  }, [isSearching, searchValue]);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(prev => !prev);
@@ -262,6 +262,39 @@ export const Header: React.FC = () => {
             </Button>
           </Toolbar>
         </AppBar>
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          sx={{
+            width: '40%',
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: '40%'
+            }
+          }}
+        >
+          <List>
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <NotificationsNoneIcon />
+              </ListItemIcon>
+              <ListItemText primary="Deals" />
+            </ListItem>
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText primary="Menu" />
+            </ListItem>
+            <ListItem component={ButtonBase} onClick={handleDealClick}>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText primary="Account" />
+            </ListItem>
+          </List>
+        </Drawer>
       </div>
     </>
   );

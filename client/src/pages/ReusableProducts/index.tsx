@@ -23,44 +23,24 @@ const ReusableProducts = ({
           marginLeft: { xs: '0', sm: '20px' }
         }}
       >
-        {from === 'search' ? (
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            sx={{
-              marginBottom: '10px',
-              paddingLeft: '40px',
-              display: 'flex',
-              justifyContent: { xs: 'center', sm: 'start' }
-            }}
-          >
-            {productList.length} Search results
-          </Typography>
-        ) : from === 'home' ? (
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            sx={{
-              marginBottom: '10px',
-              display: 'flex',
-              justifyContent: { xs: 'center', sm: 'start' }
-            }}
-          >
-            Exclusive Deals
-          </Typography>
-        ) : (
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            sx={{
-              marginBottom: '10px',
-              display: 'flex',
-              justifyContent: { xs: 'center', sm: 'start' }
-            }}
-          >
-            Exclusive Deals On Funitures
-          </Typography>
-        )}
+        <Typography
+          variant="h6"
+          fontWeight={600}
+          sx={{
+            marginBottom: '10px',
+            display: 'flex',
+            justifyContent: { xs: 'center', sm: 'start' },
+            paddingLeft: '40px'
+          }}
+        >
+          {from === 'search'
+            ? `${productList.length} Search results`
+            : from === 'home'
+            ? 'Exclusive Deals'
+            : from === 'headerelectronics'
+            ? 'Exclusive Deals On Electronics'
+            : 'Exclusive Deals On Funitures'}
+        </Typography>
 
         <Box
           sx={{
@@ -76,7 +56,8 @@ const ReusableProducts = ({
           {productList.map((item, index) => (
             <div key={index}>
               {from === 'headerelectronics'
-                ? isAmazon(item) && <AmazonProduct item={item} />
+                ? isAmazon(item) &&
+                  item.title !== '' && <AmazonProduct item={item} />
                 : isWalmart(item) && <WalmartProduct item={item} />}
             </div>
           ))}
