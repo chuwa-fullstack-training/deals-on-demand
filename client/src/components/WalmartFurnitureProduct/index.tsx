@@ -1,14 +1,18 @@
 import { Box, Button, Paper, Stack, Typography, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { AmazonProduct as ItemType } from '@/types/amazon';
+import { WalmartProduct as ItemType } from '@/types/walmart';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const AmazonProduct = ({ item }: { item: ItemType }) => {
+const WalmartProduct = ({ item }: { item: ItemType }) => {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const searchText = params.get('item');
   const { breakpoints } = useTheme();
   const mediumSizeMatches = useMediaQuery(breakpoints.up('md'));
   const toDetails = () => {
-    navigate('/product/amazon/' + item.id);
+    navigate('/product/walmart/' + item.Id, {
+      state: { searchText: searchText }
+    });
   };
   return (
     <Paper
@@ -40,12 +44,12 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
           <Box
             component="img"
             sx={{ height: { xs: 70, sm: 70, md: 150 } }}
-            src={item.image1}
+            src={item.ImageUrl}
             alt=""
           />
         </Box>
         <Box>
-          <Typography sx={{ fontSize: '10px' }}>amazon</Typography>
+          <Typography sx={{ fontSize: '10px' }}>walmart</Typography>
         </Box>
         <Box
           sx={{
@@ -71,7 +75,7 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
                 fontWeight: { xs: 400, md: 600 }
               }}
             >
-              {item.title}
+              {item.Name}
             </Typography>
           </Box>
         </Box>
@@ -89,19 +93,19 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
             direction="row"
             sx={{ gap: '5px', margin: { xs: '5px 0', sm: '5px 0', md: '0 0' } }}
           >
-            {item.originalPrice !== item.currentPrice ? (
+            {item.OriginalPrice !== item.CurrentPrice ? (
               <Typography
                 sx={{
                   fontSize: { xs: '11px', sm: '11px', md: '13px' },
                   color: 'green'
                 }}
               >
-                ${item.currentPrice}
+                ${item.CurrentPrice}
               </Typography>
             ) : (
               <></>
             )}
-            {item.originalPrice === '' ? (
+            {item.OriginalPrice === '' ? (
               <></>
             ) : (
               <Typography
@@ -110,7 +114,7 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
                   textDecoration: 'line-through'
                 }}
               >
-                ${item.originalPrice}
+                ${item.OriginalPrice}
               </Typography>
             )}
           </Stack>
@@ -131,4 +135,4 @@ const AmazonProduct = ({ item }: { item: ItemType }) => {
     </Paper>
   );
 };
-export default AmazonProduct;
+export default WalmartProduct;
