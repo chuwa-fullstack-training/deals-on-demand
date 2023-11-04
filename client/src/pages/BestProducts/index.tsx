@@ -37,26 +37,36 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
         >
           Best Deals On Electronics
         </Typography>
-        <Box sx={{ display: 'flex', width: '100%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            width: '100%'
+          }}
+        >
           <Button
-            sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
+            sx={{
+              borderRadius: '5px',
+              display: { xs: 'none', sm: 'block' }
+            }}
             onClick={() =>
               scrollTo(scrollRef1, mediumSizeMatches ? -600 : -300)
             }
           >
-            <ArrowBackIosIcon />
+            <ArrowBackIosIcon
+              sx={{
+                color: 'black'
+              }}
+            />
           </Button>
           <Box
             ref={scrollRef1}
             sx={{
               display: 'flex',
-              flexDirection: 'row',
-              flexWrap: { xs: 'wrap', sm: 'nowrap' },
+              // flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: { xs: 'center', sm: 'start' },
+              // justifyContent: { xs: 'start', sm: 'start' },
               width: '100%',
-              height: { md: 310, sm: 200, xs: 300 },
-
+              height: { xs: 220, sm: 220, md: 310 },
               margin: '10px 0',
               overflow: { sm: 'hidden' },
               overflowX: 'scroll',
@@ -64,16 +74,16 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
             }}
           >
             {productList.list1.map((item, index) => (
-              <div key={index}>
+              <Box key={index}>
                 {item.title === '' ? <></> : <AmazonProduct item={item} />}
-              </div>
+              </Box>
             ))}
           </Box>
           <Button
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
             onClick={() => scrollTo(scrollRef1, mediumSizeMatches ? 600 : 300)}
           >
-            <ArrowForwardIosIcon />
+            <ArrowForwardIosIcon sx={{ color: 'black' }} />
           </Button>
         </Box>
         <Divider>
@@ -96,18 +106,17 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
               scrollTo(scrollRef2, mediumSizeMatches ? -600 : -300)
             }
           >
-            <ArrowBackIosIcon />
+            <ArrowBackIosIcon sx={{ color: 'black' }} />
           </Button>
           <Box
             ref={scrollRef2}
             sx={{
               display: 'flex',
-              flexDirection: 'row',
-              flexWrap: { xs: 'wrap', sm: 'nowrap' },
+              // flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: { xs: 'center', sm: 'start' },
+              // justifyContent: { xs: 'center', sm: 'start' },
               width: '100%',
-              height: { md: 310, sm: 200, xs: 300 },
+              height: { xs: 220, sm: 220, md: 310 },
               margin: '10px 0',
               overflow: { sm: 'hidden' },
               overflowX: 'scroll',
@@ -124,7 +133,7 @@ const BestProducts = ({ productList }: { productList: ProductListType }) => {
             sx={{ borderRadius: '5px', display: { xs: 'none', sm: 'block' } }}
             onClick={() => scrollTo(scrollRef2, mediumSizeMatches ? 600 : 300)}
           >
-            <ArrowForwardIosIcon />
+            <ArrowForwardIosIcon sx={{ color: 'black' }} />
           </Button>
         </Box>
       </Box>
